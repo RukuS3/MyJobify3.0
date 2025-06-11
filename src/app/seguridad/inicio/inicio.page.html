@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<ion-content class="inicio-content" [fullscreen]="true">
+  <div class="inicio-container">
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+      <ion-icon name="search" class="search-icon"></ion-icon>
+      <input 
+        type="text" 
+        placeholder="Buscar por título o comuna" 
+        [(ngModel)]="filtroTexto" 
+        class="search-input" />
+    </div>
+
+    <!-- Selector de categoría -->
+    <ion-item lines="none" class="select-categoria-item">
+      <ion-label class="select-categoria-label">Filtrar:</ion-label>
+      <ion-select 
+        [(ngModel)]="categoriaSeleccionada" 
+        interface="popover" 
+        placeholder="Selecciona" 
+        class="select-categoria">
+        <ion-select-option value="todas">Todos</ion-select-option>
+        <ion-select-option value="electricista">Electricista</ion-select-option>
+        <ion-select-option value="plomero">Plomero</ion-select-option>
+        <ion-select-option value="cerrajero">Cerrajero</ion-select-option>
+        <ion-select-option value="mecanico">Mecánico</ion-select-option>
+        <ion-select-option value="gasfiter">Gasfíter</ion-select-option>
+        <ion-select-option value="pintor">Pintor</ion-select-option>
+        <ion-select-option value="albanil">Albañil</ion-select-option>
+        <ion-select-option value="obrero">Obrero</ion-select-option>
+        <ion-select-option value="carpintero">Carpintero</ion-select-option>
+        <ion-select-option value="sastre">Sastre</ion-select-option>
+        <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
+        <ion-select-option value="lavar_auto">Lavar Auto</ion-select-option>
+        <ion-select-option value="jardineria">Jardinería</ion-select-option>
+        <ion-select-option value="masajista">Masajista</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Lista de publicaciones filtradas y limitadas -->
+    <div *ngFor="let item of publicacionesFiltradas | slice:0:limite" class="card" (click)="verDetalle(item.id)">
+      <div class="card-left">
+        <h3>{{ item.titulo }}</h3>
+        <p>{{ item.comuna }}</p>
+        <p class="descripcion">
+          Pago estimado: {{ item.montoPaga | currency:'CLP':'symbol':'1.0-0' }}
+        </p>
+
+        <ion-button fill="clear" class="heart-btn" (click)="guardarPublicacion(item); $event.stopPropagation()">
+          <ion-icon [name]="estaGuardada(item) ? 'heart' : 'heart-outline'" color="danger"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="card-right">
+        <img [src]="item.agregarfoto" alt="Imagen" class="publicacion-img" *ngIf="item.agregarfoto" />
+      </div>
+    </div>
+
+    <!-- Scroll infinito -->
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="cargarMas($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </div>
+
+
+  
+</ion-content>
+
+<!-- Footer -->
+<app-footer></app-footer>

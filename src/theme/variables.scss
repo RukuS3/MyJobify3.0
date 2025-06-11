@@ -1,0 +1,40 @@
+// Para más información sobre cómo crear tu propio tema, por favor revisa:
+// https://ionicframework.com/docs/theming/
+
+// Variables del tema claro
+:root {
+    --ion-background-color: #ffffff;   /* Fondo blanco */
+    --ion-text-color: #000000;         /* Texto negro */
+    --ion-toolbar-background: #ffffff; /* Azul */
+    --ion-toolbar-color: white;        /* Texto blanco */
+    --ion-color-primary: #ffffff;      /* Azul primario */
+    --ion-color-primary-contrast: #ffffff; /* Contraste blanco para los botones */
+    --ion-input-background: #ffffff;   /* Fondo blanco para inputs */
+    --ion-input-placeholder-color: #888; /* Gris para los placeholders */
+    --ion-border-color: #dcdcdc;       /* Gris claro para bordes */
+  }
+  
+  // Definir los colores del tema oscuro si deseas habilitarlo más adelante
+  // El modo oscuro puede ser controlado a través de la preferencia de la plataforma del sistema o mediante JavaScript.
+  body.dark-theme {
+    --ion-background-color: #222428;   // Fondo oscuro
+    --ion-text-color: #ffffff;         // Texto blanco
+  
+    --ion-toolbar-background: #333;    // Barra de herramientas más oscura
+    --ion-toolbar-color: white;
+  
+    --ion-color-primary: #ffb900;      // Un color diferente para el tema oscuro
+    --ion-color-primary-rgb: 255, 185, 0;
+    --ion-color-primary-contrast: #333;
+  
+    --ion-input-background: #333;      // Fondo oscuro en los inputs
+    --ion-input-placeholder-color: #aaa;  // Placeholder en gris claro
+  
+    --ion-border-color: #444;           // Bordes oscuros
+    --ion-tab-bar-background: #333;     // Fondo oscuro para las pestañas
+    --ion-tab-bar-color: #ffb900;       // Color amarillo para las pestañas
+  
+    --ion-footer-background: #333;      // Fondo oscuro para el pie de página
+    --ion-footer-text-color: #fff;      // Texto blanco en el pie de página
+  }
+  

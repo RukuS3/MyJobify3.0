@@ -1,0 +1,103 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-title class="logo" slot="start">MYJOBIFY</ion-title>
+    <ion-buttons slot="end">
+      <div class="avatar-container">
+        <ion-button fill="clear" [routerLink]="'/informacion'" class="profile-btn">
+          <ion-avatar class="profile-avatar">
+            <img src="https://icon-library.com/images/info-icon-png-transparent/info-icon-png-transparent-6.jpg" alt="Perfil" />
+          </ion-avatar>
+        </ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content class="ion-padding">
+
+  <!-- Foto de perfil con texto para cambiar -->
+  <div class="profile-section ion-text-center" style="margin-bottom: 10px;">
+    <div class="avatar-container" (click)="cambiarFotoPerfil()" style="display: inline-block; cursor: pointer; position: relative;">
+      <ion-avatar class="profile-picture" style="width: 120px; height: 120px;">
+        <img [src]="fotoPerfil" alt="Foto de perfil" style="width: 100%; height: 100%; border-radius: 50%;">
+      </ion-avatar>
+      <div class="overlay-text">Cambiar foto</div>
+    </div>
+
+    <!-- Botón de cerrar sesión -->
+    <ion-button expand="block" color="danger" size="small" (click)="logout()" style="margin-top: 10px;">
+      Cerrar sesión
+      <ion-icon name="log-out-outline" slot="end"></ion-icon>
+    </ion-button>
+  </div>
+
+
+  <ion-list lines="full">
+
+    <!-- Nombre (no editable) -->
+    <ion-item>
+      <ion-label position="stacked">Nombre completo (no editable)</ion-label>
+      <ion-input [value]="nombre + ' ' + apellido" readonly></ion-input>
+    </ion-item>
+
+    <!-- Teléfono -->
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input
+        type="tel"
+        [readonly]="!editandoTelefono"
+        [value]="telefono"
+        (ionInput)="telefono = $event.detail.value"
+      ></ion-input>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" (click)="editandoTelefono = !editandoTelefono">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <!-- Correo -->
+    <ion-item>
+      <ion-label position="stacked">Correo electrónico</ion-label>
+      <ion-input
+        type="email"
+        [readonly]="!editandoCorreo"
+        [value]="correo"
+        (ionInput)="correo = $event.detail.value"
+      ></ion-input>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" (click)="editandoCorreo = !editandoCorreo">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <!-- Dirección -->
+    <ion-item>
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-input
+        type="text"
+        [readonly]="!editandoDireccion"
+        [value]="direccion"
+        (ionInput)="direccion = $event.detail.value"
+      ></ion-input>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" (click)="editandoDireccion = !editandoDireccion">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" color="danger" (click)="guardarCambios()">
+      Guardar cambios
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<app-footer></app-footer>

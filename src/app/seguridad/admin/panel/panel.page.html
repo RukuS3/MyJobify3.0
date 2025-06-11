@@ -1,0 +1,50 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-title class="logo" slot="start">ADMIN</ion-title>
+    <ion-buttons slot="end">
+      <div class="avatar-container">
+        <ion-button fill="clear" [routerLink]="'/auth'" class="profile-btn">
+          <ion-avatar class="profile-avatar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzGJt3MmZ_kzaVlppF_FRCLQG7juptHoFqew&s" alt="Perfil" />
+          </ion-avatar>
+        </ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Denuncias de Usuarios</h2>
+  <ion-list *ngIf="denuncias && denuncias.length > 0; else noDenuncias">
+    <ion-item *ngFor="let denuncia of denuncias" [routerLink]="['/denuncia-detalle', denuncia.id]">
+      <ion-label>
+        <h3>Denunciado: {{ denuncia.denunciadoNombre }}</h3>
+        <p>Detalle: {{ denuncia.descripcion }}</p>
+        <p>Motivo: {{ denuncia.motivo }}</p>
+        <small>{{ denuncia.fecha | date:'medium' }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #noDenuncias>
+    <p>No hay denuncias.</p>
+  </ng-template>
+
+  <h2 class="ion-margin-top">Reportes de Publicaciones</h2>
+  <ion-list *ngIf="reportesPublicacion && reportesPublicacion.length > 0; else noReportes">
+    <ion-item *ngFor="let reporte of reportesPublicacion" [routerLink]="['/detalle-pub-admin', reporte.publicacionId]">
+      <ion-thumbnail slot="start" *ngIf="reporte.imagen">
+        <img [src]="reporte.imagen" alt="Imagen publicación" />
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ reporte.titulo }}</h3>
+        <p>{{ reporte.motivo }}</p>
+        <small>{{ reporte.fechaReporte | date:'medium' }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #noReportes>
+    <p>No hay reportes de publicaciones.</p>
+  </ng-template>
+
+
+</ion-content>

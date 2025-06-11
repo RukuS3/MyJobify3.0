@@ -1,0 +1,122 @@
+
+.custom-header {
+  --background: #ffffff !important;
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0 16px;
+
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    color: #b30000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    flex: 1;
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .notification-button {
+    position: absolute;
+    bottom: -9px;
+    left: -9px;
+    width: 32px;
+    height: 32px;
+    min-width: auto;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 27px; /* ← tamaño correcto y grande */
+      color: #b30000;
+    }
+
+    &:active {
+      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
+    }
+  }
+}
+
+ion-content {
+  --background: #f8f9fa;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1e1e1e;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+
+    strong {
+      color: #000;
+    }
+  }
+
+  ion-button {
+    margin-top: 16px;
+    font-weight: bold;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+
+  ion-button[color="success"] {
+    --background: #28a745;
+    --background-activated: #218838;
+  }
+
+  ion-button[color="danger"] {
+    --background: #dc3545;
+    --background-activated: #c82333;
+  }
+
+  @media (min-width: 600px) {
+    ion-button {
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+}

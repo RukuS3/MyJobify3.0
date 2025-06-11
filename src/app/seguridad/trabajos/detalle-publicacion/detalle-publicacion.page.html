@@ -1,0 +1,127 @@
+<app-header></app-header>
+
+<!-- Cuerpo -->
+<ion-content class="detalle-content"> 
+  <div class="card-publicacion" *ngIf="publicacion; else cargando">
+
+    <div style="position: absolute; top: 16px; left: 16px; z-index: 10;">
+      <ion-button fill="clear" size="small" (click)="goBack()">
+        <ion-icon name="arrow-back-outline" slot="icon-only" style="color: #8b0000; font-size: 24px;"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Imagen principal -->
+    <img [src]="publicacion.agregarfoto" alt="imagen" class="detalle-imagen" *ngIf="publicacion.agregarfoto" />
+
+    <!-- Información del trabajo -->
+    <h2 class="titulo-trabajo">{{ publicacion.titulo }}</h2>
+    <p class="ubicacion"><strong>{{ publicacion.ubicacion }}</strong></p>
+    <p class="descripcion">{{ publicacion.descripcion }}</p>
+
+    <!-- Rating con avatar -->
+    <div class="rating-container">
+      <ion-avatar class="rating-avatar" *ngIf="usuarioCreador?.fotoUrl; else fotoDefault">
+        <img [src]="usuarioCreador.fotoUrl" />
+      </ion-avatar>
+      <ng-template #fotoDefault>
+        <ion-avatar class="rating-avatar">
+          <img src="https://e7.pngegg.com/pngimages/789/888/png-clipart-computer-icons-login-person-user-avatar-log-smiley-desktop-wallpaper.png" />
+        </ion-avatar>
+      </ng-template>
+
+      <div class="rating-info">
+        <h3>{{ usuarioCreador?.nombre || 'Usuario' }} {{ usuarioCreador?.apellido || '' }}</h3>
+        
+        <!-- Mostrar estrellas solo si hay calificación -->
+        <div class="estrellas" *ngIf="usuarioCreador?.promedioCalificacion !== null && usuarioCreador?.promedioCalificacion > 0">
+          <ng-container *ngFor="let estrella of obtenerEstrellas(usuarioCreador.promedioCalificacion)">
+            <ion-icon [name]="estrella" color="warning"></ion-icon>
+          </ng-container>
+          <span class="rating-num">{{ usuarioCreador.promedioCalificacion }}</span>
+        </div>
+
+        <!-- Si no hay calificación -->
+        <p class="rating-label" *ngIf="!usuarioCreador?.promedioCalificacion">Sin calificaciones</p>
+        <p class="rating-label" *ngIf="usuarioCreador?.promedioCalificacion">Calificación</p>
+      </div>
+    </div>
+
+    <!-- Botón de solicitud y mensajes -->
+    <ng-container *ngIf="datosCargados">
+
+      <!-- Botón para enviar solicitud si NO ha enviado y NO es el dueño -->
+      <ion-button
+        *ngIf="!solicitudEnviada && usuarioActualUid !== publicacion?.usuarioId"
+        expand="block"
+        class="btn-solicitud"
+        color="success"
+        (click)="enviarSolicitud()"
+      >
+        Mandar solicitud de trabajo
+      </ion-button>
+
+      <!-- Mensaje si fue RECHAZADA -->
+      <p *ngIf="solicitudEnviada && estadoSolicitud === 'rechazada'" class="info-solicitud info-rechazada">
+        La solicitud que enviaste fue <strong>Rechazada</strong>
+      </p>
+
+      <!-- Botón para estados pendiente o aceptada -->
+      <ion-button
+        *ngIf="solicitudEnviada && (estadoSolicitud === 'pendiente' || estadoSolicitud === 'aceptada')"
+        expand="block"
+        [ngClass]="{
+          'btn-pendiente': estadoSolicitud === 'pendiente',
+          'btn-aceptada': estadoSolicitud === 'aceptada'
+        }"
+        color="medium"
+        disabled
+      >
+        Solicitud {{ estadoSolicitud === 'pendiente' ? 'pendiente' : 'aceptada' }}
+      </ion-button>
+
+      <!-- Botón para reportar si NO ha sido reportado y NO es el dueño -->
+      <ion-button
+        *ngIf="!reporteEnviado && usuarioActualUid !== publicacion?.usuarioId"
+        expand="block"
+        color="danger"
+        fill="outline"
+        (click)="abrirDialogoReporte()"
+        style="margin-top: 16px;"
+      >
+        <ion-icon slot="start" name="flag-outline"></ion-icon>
+        Reportar publicación
+      </ion-button>
+
+      <!-- Mensaje si ya reportó -->
+      <p *ngIf="reporteEnviado && usuarioActualUid !== publicacion?.usuarioId" class="info-solicitud info-rechazada">
+        Ya reportaste esta publicación. Gracias por tu colaboración.
+      </p>
+
+      <!-- Mensaje si es el propietario -->
+      <p *ngIf="usuarioActualUid === publicacion?.usuarioId" class="info-solicitud info-aceptada">
+        Eres el propietario de esta publicación.
+      </p>
+
+    </ng-container>
+
+    <!-- Texto informativo para estados aceptados o pendientes -->
+    <p *ngIf="solicitudEnviada && estadoSolicitud !== 'rechazada'" class="info-solicitud" 
+      [ngClass]="{
+        'info-aceptada': estadoSolicitud === 'aceptada',
+        'info-pendiente': estadoSolicitud === 'pendiente'
+      }">
+      Ya enviaste una solicitud. Estado: <strong>{{ estadoSolicitud | titlecase }}</strong>
+    </p>
+
+  </div>
+
+  <!-- Loader mientras carga -->
+  <ng-template #cargando>
+    <div class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando publicación...</p>
+    </div>
+  </ng-template>
+</ion-content>
+
+<app-footer></app-footer>

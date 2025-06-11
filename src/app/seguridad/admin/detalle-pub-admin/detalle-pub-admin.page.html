@@ -1,0 +1,81 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-title class="logo" slot="start">ADMIN</ion-title>
+    <ion-buttons slot="end">
+      <div class="avatar-container">
+        <ion-button fill="clear" [routerLink]="'/auth'" class="profile-btn">
+          <ion-avatar class="profile-avatar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzGJt3MmZ_kzaVlppF_FRCLQG7juptHoFqew&s" alt="Perfil" />
+          </ion-avatar>
+        </ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Cuerpo -->
+<ion-content class="detalle-content"> 
+  <div class="card-publicacion" *ngIf="publicacion; else cargando">
+
+    <div style="position: absolute; top: 16px; left: 16px; z-index: 10;">
+      <ion-button fill="clear" size="small" (click)="goBack()">
+        <ion-icon name="arrow-back-outline" slot="icon-only" style="color: #8b0000; font-size: 24px;"></ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Imagen principal -->
+    <img [src]="publicacion.agregarfoto" alt="imagen" class="detalle-imagen" *ngIf="publicacion.agregarfoto" />
+
+    <!-- Información del trabajo -->
+    <h2 class="titulo-trabajo">{{ publicacion.titulo }}</h2>
+    <p class="ubicacion"><strong>{{ publicacion.ubicacion }}</strong></p>
+    <p class="descripcion">{{ publicacion.descripcion }}</p>
+
+    <!-- Rating con avatar -->
+    <div class="rating-container">
+      <ion-avatar class="rating-avatar" *ngIf="usuarioCreador?.fotoUrl; else fotoDefault">
+        <img [src]="usuarioCreador.fotoUrl" />
+      </ion-avatar>
+      <ng-template #fotoDefault>
+        <ion-avatar class="rating-avatar">
+          <img src="https://e7.pngegg.com/pngimages/789/888/png-clipart-computer-icons-login-person-user-avatar-log-smiley-desktop-wallpaper.png" />
+        </ion-avatar>
+      </ng-template>
+
+      <div class="rating-info">
+        <h3>{{ usuarioCreador?.nombre || 'Usuario' }} {{ usuarioCreador?.apellido || '' }}</h3>
+        <div class="estrellas">
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star-half" color="warning"></ion-icon>
+          <span class="rating-num">{{ publicacion.rating || '4.7' }}</span>
+        </div>
+        <p class="rating-label">Calificación</p>
+      </div>
+    </div>
+
+    <!-- Botones solo para admin -->
+    <div class="admin-actions">
+      <ion-button expand="block" color="success" (click)="aprobarPublicacion()">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        Aprobar Publicación
+      </ion-button>
+
+      <ion-button expand="block" color="danger" (click)="eliminarPublicacion()">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Eliminar Publicación
+      </ion-button>
+    </div>
+
+  </div>
+
+  <!-- Loader mientras carga -->
+  <ng-template #cargando>
+    <div class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando publicación...</p>
+    </div>
+  </ng-template>
+</ion-content>

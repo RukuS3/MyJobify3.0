@@ -1,0 +1,145 @@
+.no-favs {
+  text-align: center;
+  margin-top: 50%;
+  color: gray;
+
+  ion-icon {
+    font-size: 48px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin: 15px 10px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); // sombra más suave
+}
+
+// ✅ Separación sutil entre publicaciones guardadas
+.card + .card {
+  margin-top: 20px;
+  border-top: 1px solid #e0e0e0; // línea sutil
+  padding-top: 15px;
+}
+
+.card-left {
+  flex: 1;
+}
+
+.card-right img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+// Fondo general del contenido
+.save-publicacion-content {
+  background-color: #f9f9f9; // fondo suave detrás de las tarjetas
+}
+
+//Parte superior de la pagina
+.custom-header {
+  --background: #ffffff !important;
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0 16px;
+
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    color: #b30000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    flex: 1;
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .notification-button {
+    position: absolute;
+    bottom: -9px;
+    left: -9px;
+    width: 32px;
+    height: 32px;
+    min-width: auto;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 27px;
+      color: #b30000;
+    }
+
+    &:active {
+      background-color: rgba(179, 0, 0, 0.1);
+    }
+  }
+}
+
+.custom-footer {
+  --background: #8b0000 !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 10;
+  padding-top: 6px;
+
+  .footer-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    ion-icon {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+  }
+}

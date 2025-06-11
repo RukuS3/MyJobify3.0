@@ -1,0 +1,143 @@
+<app-header *ngIf="!mostrandoVideo"></app-header>
+
+<ion-content class="ion-padding">
+  <!-- Botón volver -->
+  <div style="position: absolute; top: 16px; left: 16px; z-index: 10;">
+    <ion-button fill="clear" size="small" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" slot="icon-only" style="color: #8b0000; font-size: 24px;"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Título -->
+  <div class="crear-publicacion">
+    <span>Crear publicación</span>
+  </div>
+
+  <!-- Contenedor clickeable para agregar foto -->
+  <div class="foto-publicacion-container" *ngIf="!mostrandoVideo" (click)="abrirOpcionesFoto()">
+    <!-- La imagen debe tener la clase foto-publicacion para aplicar el CSS -->
+    <img class="foto-publicacion" [src]="fotoPublicacion" alt="Agregar Foto" />
+  </div>
+
+
+  <!-- Contenedor fullscreen para la cámara -->
+  <div *ngIf="mostrandoVideo" class="camera-fullscreen">
+    <video #videoElement autoplay playsinline></video>
+
+    <div class="camera-buttons-row">
+      <button class="close-button" (click)="detenerCamara()">✕</button>
+      <button class="shutter-button" (click)="capturarFoto()"></button>
+      <button class="switch-button" (click)="cambiarCamaraWeb()">🔄</button>
+    </div>
+  </div>
+
+  <!-- Canvas oculto para capturar imagen -->
+  <canvas #canvasElement style="display:none;"></canvas>
+
+  <!-- Input file oculto -->
+  <input type="file" #fileInput (change)="seleccionarImagenDesdeInput($event)" accept="image/*" hidden />
+
+
+
+  <form [formGroup]="publicacionForm" (ngSubmit)="publicar()">
+    <ion-item>
+      <ion-input formControlName="titulo" placeholder="Escribe un título"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="publicacionForm.get('titulo')?.touched && publicacionForm.get('titulo')?.invalid">
+      El título es obligatorio.
+    </ion-text>
+
+    <ion-item>
+      <ion-textarea formControlName="descripcion" placeholder="Descripción"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="publicacionForm.get('descripcion')?.touched && publicacionForm.get('descripcion')?.invalid">
+      La descripción es obligatoria.
+    </ion-text>
+
+    <ion-item>
+      <ion-input type="number" formControlName="montoPaga" placeholder="Total a pagar en CLP"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="publicacionForm.get('montoPaga')?.touched && publicacionForm.get('montoPaga')?.invalid">
+      El monto debe ser mayor o igual a 0.
+    </ion-text>
+
+    <div class="region-comuna">
+      <strong>Región Metropolitana</strong>
+      <ion-item>
+        <ion-label color="danger">Comuna</ion-label>
+        <ion-select formControlName="comuna" color="danger" interface="popover" placeholder="Selecciona una comuna">
+          <ion-select-option value="santiago">Santiago</ion-select-option>
+          <ion-select-option value="maipu">Maipú</ion-select-option>
+          <ion-select-option value="las_condes">Las Condes</ion-select-option>
+          <ion-select-option value="providencia">Providencia</ion-select-option>
+          <ion-select-option value="la_florida">La Florida</ion-select-option>
+          <ion-select-option value="puente_alto">Puente Alto</ion-select-option>
+          <ion-select-option value="nunoa">Ñuñoa</ion-select-option>
+          <ion-select-option value="la_reina">La Reina</ion-select-option>
+          <ion-select-option value="macul">Macul</ion-select-option>
+          <ion-select-option value="penalolen">Peñalolén</ion-select-option>
+          <ion-select-option value="independencia">Independencia</ion-select-option>
+          <ion-select-option value="huechuraba">Huechuraba</ion-select-option>
+          <ion-select-option value="quilicura">Quilicura</ion-select-option>
+          <ion-select-option value="recoleta">Recoleta</ion-select-option>
+          <ion-select-option value="cerrillos">Cerrillos</ion-select-option>
+          <ion-select-option value="el_bosque">El Bosque</ion-select-option>
+          <ion-select-option value="san_bernardo">San Bernardo</ion-select-option>
+          <ion-select-option value="lo_prado">Lo Prado</ion-select-option>
+          <ion-select-option value="quinta_normal">Quinta Normal</ion-select-option>
+          <ion-select-option value="estacion_central">Estación Central</ion-select-option>
+          <ion-select-option value="pedro_aguirre_cerda">Pedro Aguirre Cerda</ion-select-option>
+          <ion-select-option value="conchali">Conchalí</ion-select-option>
+          <ion-select-option value="renca">Renca</ion-select-option>
+          <ion-select-option value="la_pintana">La Pintana</ion-select-option>
+          <ion-select-option value="san_miguel">San Miguel</ion-select-option>
+          <ion-select-option value="san_joaquin">San Joaquín</ion-select-option>
+          <ion-select-option value="lo_espejo">Lo Espejo</ion-select-option>
+          <ion-select-option value="la_granja">La Granja</ion-select-option>
+          <ion-select-option value="lo_barnechea">Lo Barnechea</ion-select-option>
+          <ion-select-option value="vitacura">Vitacura</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <ion-text color="danger" *ngIf="publicacionForm.get('comuna')?.touched && publicacionForm.get('comuna')?.invalid">
+      Selecciona una comuna.
+    </ion-text>
+
+    <div class="categoria">
+      <ion-item>
+        <ion-label color="danger">Categoría</ion-label>
+        <ion-select formControlName="categoria" color="danger" interface="popover" placeholder="Selecciona una categoría">
+          <ion-select-option value="electricista">Electricista</ion-select-option>
+          <ion-select-option value="plomero">Plomero</ion-select-option>
+          <ion-select-option value="cerrajero">Cerrajero</ion-select-option>
+          <ion-select-option value="mecanico">Mecánico</ion-select-option>
+          <ion-select-option value="gasfiter">Gasfíter</ion-select-option>
+          <ion-select-option value="pintor">Pintor</ion-select-option>
+          <ion-select-option value="albanil">Albañil</ion-select-option>
+          <ion-select-option value="obrero">Obrero</ion-select-option>
+          <ion-select-option value="carpintero">Carpintero</ion-select-option>
+          <ion-select-option value="sastre">Sastre</ion-select-option>
+          <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
+          <ion-select-option value="lavar_auto">Lavar Auto</ion-select-option>
+          <ion-select-option value="jardineria">Jardinería</ion-select-option>
+          <ion-select-option value="masajista">Masajista</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <ion-text color="danger" *ngIf="publicacionForm.get('categoria')?.touched && publicacionForm.get('categoria')?.invalid">
+      Selecciona una categoría.
+    </ion-text>
+
+    <!-- input file oculto para navegador -->
+    <input type="file" hidden #fileInput accept="image/*" capture="environment" (change)="seleccionarImagenDesdeInput($event)" />
+
+    <br>
+    <br>
+    <br>
+    <ion-button expand="block" color="danger" type="submit" [disabled]="publicacionForm.invalid">
+      Publicar
+    </ion-button>
+  </form>
+</ion-content>

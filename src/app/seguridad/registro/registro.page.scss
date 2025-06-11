@@ -1,0 +1,80 @@
+.login-content {
+    --background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .login-container {
+      width: 100%;
+      max-width: 320px;
+      margin: auto;
+      padding: 16px;
+  
+      .logo {
+        font-size: 2.8rem;
+        font-weight: 900;
+        font-family: 'Impact', 'Arial Black', sans-serif;
+        color: #b30000;
+        margin-bottom: 0.3rem;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+  
+      .subtitle {
+        font-size: 1.2rem;
+        color: #b30000;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+        text-align: left; 
+      }
+  
+      ion-item {
+        margin-bottom: 12px;
+        --background: transparent;
+        --padding-start: 0;
+      }
+  
+      ion-input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+      }
+
+      .select-pro{
+        margin-top: 50px;
+      }
+  
+      .forgot-password {
+        font-size: 0.9rem;
+        color: #b30000;
+        text-align: left;
+        text-decoration: underline;
+        margin-bottom: 1.2rem;
+        cursor: pointer;
+      }
+  
+      .login-button {
+        background: linear-gradient(to right, #ff8a8a, #8b0000); 
+        color: white;
+        font-weight: bold;
+        border-radius: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+  
+      .register-text {
+        text-align: center;
+        font-size: 0.95rem;
+  
+        .register-link {
+          font-weight: bold;
+          color: #b30000;
+          cursor: pointer;
+          margin-left: 5px;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  

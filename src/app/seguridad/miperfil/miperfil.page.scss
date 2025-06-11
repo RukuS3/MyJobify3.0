@@ -1,0 +1,232 @@
+.inicio-content {
+  --background: #ffffff;
+
+  .inicio-container {
+    padding: 10px 16px;
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border: 2px solid #b30000;
+      border-radius: 25px;
+      padding: 8px 12px;
+      margin: 16px 0;
+
+      .search-icon {
+        font-size: 20px;
+        color: #b30000;
+        margin-right: 8px;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 16px;
+      }
+    }
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      box-shadow: 0 8px px rgba(0, 0, 0, 0.1);
+
+      .card-left {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+          margin-top: 4px;
+          //Estrella
+          ion-icon {
+            color: gold;
+            margin-right: 4px;
+          }
+          //Numero de calificacion
+          h5 {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .card-right img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.custom-header {
+  --background: #ffffff !important;
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0 16px;
+
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    color: #b30000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    flex: 1;
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .notification-button {
+    position: absolute;
+    bottom: -9px;
+    left: -9px;
+    width: 32px;
+    height: 32px;
+    min-width: auto;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 27px; /* ← tamaño correcto y grande */
+      color: #b30000;
+    }
+
+    &:active {
+      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
+    }
+  }
+}
+
+.profile-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column; /* para que el botón quede debajo */
+  align-items: center;
+
+  ion-button {
+    margin-top: 12px;
+    width: 60%;
+    max-width: 200px;
+    --background: #b30000;
+    color: white;
+
+    ion-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #ccc;
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.stars-rating ion-icon {
+  cursor: default;
+}
+
+
+::ng-deep ion-alert.custom-alert {
+  --background: #ffffff;
+  --width: 90%;
+  --max-width: 320px;
+  --border-radius: 16px;
+  --box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+}
+
+::ng-deep ion-alert.custom-alert .alert-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d9534f; // rojo para advertencia
+  text-align: center;
+}
+
+::ng-deep ion-alert.custom-alert .alert-message {
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  padding: 0 10px;
+}
+
+::ng-deep ion-alert.custom-alert .alert-button {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+::ng-deep ion-alert.custom-alert .alert-button.alert-button-cancel {
+  color: #6c757d; // gris
+}
+
+::ng-deep ion-alert.custom-alert .alert-button.alert-button-confirm {
+  color: #cc0909; // rojo intenso
+}

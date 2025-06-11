@@ -1,0 +1,14 @@
+<ion-app>
+
+  <!-- Notificaciones -->
+  <app-user-notifications
+    *ngIf="mostrarNotificacionesFlag"
+    [notificaciones]="notificaciones"
+    (cerrar)="cerrarNotificaciones()"
+    (eliminar)="eliminarNotificacion($event)">
+  </app-user-notifications>
+
+  <!-- Contenido principal -->
+  <ion-router-outlet></ion-router-outlet>
+
+</ion-app>

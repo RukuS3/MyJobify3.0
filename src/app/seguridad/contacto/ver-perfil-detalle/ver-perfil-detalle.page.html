@@ -1,0 +1,127 @@
+<app-header></app-header>
+
+<ion-content *ngIf="perfil">
+  <ion-card class="perfil-card">
+    <div class="perfil-avatar-container">
+      <ion-avatar class="profile-avatar" *ngIf="perfil.fotoUrl; else defaultImage">
+        <img [src]="perfil.fotoUrl" alt="Foto de perfil" />
+      </ion-avatar>
+      <ng-template #defaultImage>
+        <ion-avatar class="profile-avatar">
+          <img src="https://e7.pngegg.com/pngimages/789/888/png-clipart-computer-icons-login-person-user-avatar-log-smiley-desktop-wallpaper.png" />
+        </ion-avatar>
+      </ng-template>
+    </div>
+
+    <ion-card-header class="card-header-center">
+      <ion-card-title>{{ perfil.nombre }} {{ perfil.apellido }}</ion-card-title>
+
+      <ion-card-subtitle *ngIf="perfil.promedioCalificacion">
+        ⭐ {{ perfil.promedioCalificacion }} / 5 ({{ perfil.totalCalificaciones }} calificaciones)
+      </ion-card-subtitle>
+
+      <ion-card-subtitle *ngIf="perfil.totalCalificaciones === 0">
+        Aún no tiene calificaciones.
+      </ion-card-subtitle>
+
+      <div *ngIf="perfil.promedioCalificacion">
+        <ion-icon
+          *ngFor="let estrella of [1,2,3,4,5]"
+          [name]="estrella <= perfil.promedioCalificacion ? 'star' : 'star-outline'"
+          color="warning">
+        </ion-icon>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content class="card-content-center">
+      <p *ngIf="puedeVerDatosPrivados">Teléfono: {{ perfil.telefono }}</p>
+      <p *ngIf="puedeVerDatosPrivados">Correo: {{ perfil.email }}</p>
+      <p *ngIf="!puedeVerDatosPrivados">Este usuario no ha compartido datos privados.</p>
+
+      <!-- Mensaje si es tu propio perfil -->
+      <div *ngIf="esPerfilPropio" style="margin: 10px 0; font-weight: bold; color: gray;">
+        Este es tu perfil.
+      </div>
+
+      <!-- Botón denunciar solo si NO es tu perfil y NO has denunciado antes -->
+      <ion-button
+        *ngIf="!esPerfilPropio && !yaDenuncio"
+        expand="block"
+        color="danger"
+        (click)="denunciarUsuario()">
+        Denunciar usuario
+      </ion-button>
+
+      <!-- Mensaje si ya denunciaste -->
+      <div *ngIf="!esPerfilPropio && yaDenuncio" style="margin: 10px 0; color: #d9534f; font-weight: bold;">
+        Ya has denunciado a este usuario.
+      </div>
+
+      <ion-button expand="block" color="success" (click)="mostrarIsla = true">
+        ¿Tarea terminada?
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Formulario de Denuncia -->
+  <ion-card *ngIf="mostrarPanelDenuncia" class="form-denuncia">
+    <ion-card-header>
+      <ion-card-title>Denunciar Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="select-item">
+        <ion-label position="floating">Motivo</ion-label>
+        <ion-select [(ngModel)]="motivoDenuncia" interface="popover">
+          <ion-select-option value="acoso">Acoso</ion-select-option>
+          <ion-select-option value="fraude">Fraude</ion-select-option>
+          <ion-select-option value="comportamientoInapropiado">Comportamiento inapropiado</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="textarea-item">
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea [(ngModel)]="detalleDenuncia"></ion-textarea>
+      </ion-item>
+
+      <ion-item class="file-item">
+        <ion-label>Adjuntar Prueba</ion-label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf" />
+      </ion-item>
+
+      <ion-button expand="block" color="danger" (click)="enviarDenuncia()">
+        Enviar Denuncia
+      </ion-button>
+      <ion-button expand="block" fill="clear" (click)="mostrarPanelDenuncia = false">
+        Cancelar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta flotante para calificación -->
+  <ion-card *ngIf="mostrarIsla" class="isla-calificacion">
+    <ion-card-header class="header-calificacion">
+      <ion-card-title>Calificar</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="estrellas">
+        <ion-icon
+          *ngFor="let estrella of [1, 2, 3, 4, 5]"
+          [name]="estrella <= calificacion ? 'star' : 'star-outline'"
+          (click)="calificacion = estrella"
+          class="estrella"
+        ></ion-icon>
+      </div>
+
+      <ion-item>
+        <ion-textarea [(ngModel)]="comentario" placeholder="Escribe un comentario"></ion-textarea>
+      </ion-item>
+
+      <ion-button color="success" (click)="enviarCalificacion()" class="btn-centro">
+        Enviar Calificación
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<app-footer></app-footer>

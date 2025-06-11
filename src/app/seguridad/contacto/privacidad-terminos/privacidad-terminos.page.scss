@@ -1,0 +1,211 @@
+.inicio-content {
+    --background: #ffffff;
+  
+    .inicio-container {
+      padding: 10px 16px;
+  
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border: 2px solid #b30000;
+        border-radius: 25px;
+        padding: 6px 12px;
+        margin: 10px 0;
+  
+        .search-icon {
+          color: #b30000;
+          font-size: 1.2rem;
+          margin-right: 8px;
+        }
+  
+        input {
+          border: none;
+          outline: none;
+          width: 100%;
+          font-size: 1rem;
+        }
+      }
+
+      .select-pro{
+        margin-top: 10px;
+      }
+  
+      .card {
+        display: flex;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        margin-bottom: 12px;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  
+        .card-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+  
+          h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+          }
+  
+          .rating {
+            display: flex;
+            align-items: center;
+  
+            ion-icon {
+              color: gold;
+              margin-right: 4px;
+            }
+  
+            span {
+              font-weight: bold;
+            }
+          }
+        }
+  
+        .card-right img {
+          width: 80px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  
+  .custom-header {
+    --background: #ffffff !important;
+    box-shadow: none;
+    border-bottom: none;
+  
+    .logo {
+      font-size: 1.5rem;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      color: #b30000;
+    }
+  
+    .profile-avatar img {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #b30000;
+        border-radius: 50%;
+        margin-top: 15px; 
+      }
+  }
+  
+  .custom-footer {
+    --background: #8b0000 !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 10;
+    padding-top: 6px;
+  
+    .footer-buttons {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      ion-icon {
+        color: #fff;
+        font-size: 1.5rem;
+      }
+    }
+  }
+ 
+
+.button-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Compensa el header y footer con altura reducida */
+  height: calc(100vh - 112px); /* Ajusta según tu header/footer (56px cada uno aprox) */
+}
+
+.login-button {
+  background: linear-gradient(to right, #ff8a8a, #8b0000); 
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 8px 20px;
+  font-size: 1rem;
+  width: auto; /* cambia de 100% a auto para hacerlo más pequeño */
+  min-width: 180px;
+} 
+
+.login-button.personalizado {
+  width: auto;             /* Quita el ancho total */
+  min-width: 200px;        /* Tamaño mínimo */
+  margin: 20px auto;       /* Centra horizontalmente */
+  display: block;          /* Necesario para que margin:auto funcione */
+}
+
+ion-button.login-button.centrado {
+  display: block !important;
+  margin: 20px auto !important;
+  width: auto !important;
+  min-width: 120px;   /* antes: 180px */
+  max-width: 160px;   /* antes: 220px */
+  padding: 6px 12px;  /* antes: 10px 20px */
+  font-size: 0.9rem;  /* un poco más pequeño */
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 4px;
+}
+
+
+.notification-button {
+  position: absolute;
+  right: 40px;   // mueve hacia la derecha del avatar
+  bottom: -5px;  // mueve hacia abajo del avatar
+  z-index: 2;
+  width: 48px;
+  height: 36px;
+  border-radius: 50%;
+  padding: 6px;
+  background-color: transparent;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+
+  ion-icon {
+    font-size: 60px;
+    color: #b30000;
+  }
+}
+
+.quienes-somos-content {
+  --background: #fff;
+
+  .quienes-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .quienes-titulo {
+    color: #8b0000;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #b30000;
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+
+  .quienes-texto {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 18px;
+  }
+}

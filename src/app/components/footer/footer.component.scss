@@ -1,0 +1,22 @@
+.custom-footer {
+  --background: #8b0000 !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 10;
+  padding: 6px 0;
+
+  .footer-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    ion-icon {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+  }
+}

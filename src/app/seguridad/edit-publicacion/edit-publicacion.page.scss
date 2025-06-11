@@ -1,0 +1,95 @@
+.inicio-content {
+  --background: #ffffff;
+
+  .inicio-container {
+    padding: 10px 16px;
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      box-shadow: 0 8px px rgba(0, 0, 0, 0.1);
+
+      .card-left {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        }
+      }
+
+      .card-right img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+    }
+  }
+
+
+.notification-icon {
+  margin-left: auto;
+}
+
+.add-icon-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.add-icon {
+  font-size: 40px;
+  color: #999;
+}
+
+.region-comuna {
+  margin-top: 16px;
+  padding-left: 8px;
+}
+
+.btn-publicar-container {
+  margin-top: 24px;
+}
+
+.btn-publicar {
+  background: linear-gradient(to right, #e52e71, #ff5864);
+  border-radius: 8px;
+}
+
+
+
+.crear-publicacion {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #b30000;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 10px 0;
+  margin-left: 30px; 
+}
+
+.foto-publicacion-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.foto-publicacion {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

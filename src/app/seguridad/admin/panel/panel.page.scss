@@ -1,0 +1,144 @@
+ion-content {
+  --background: #f4f5f8;
+  color: #222;
+
+  h2 {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.3rem;
+  }
+
+  ion-list {
+    background: transparent;
+
+    ion-item {
+      --background: #ffffff;
+      border-radius: 12px;
+      margin: 0.5rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+
+      ion-label {
+        h3 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #2c3e50;
+        }
+
+        p {
+          font-size: 0.95rem;
+          color: #555;
+          margin: 0.3rem 0;
+        }
+
+        small {
+          font-size: 0.75rem;
+          color: #999;
+        }
+      }
+
+      ion-button {
+        font-size: 0.8rem;
+        margin-left: auto;
+      }
+    }
+  }
+
+  p {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-top: 1rem;
+  }
+
+  pre {
+    background: #eee;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #333;
+    overflow-x: auto;
+  }
+}
+
+
+.custom-header {
+  --background: #ffffff !important;
+  box-shadow: none;
+  border-bottom: none;
+  padding: 0 16px;
+
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    color: #b30000;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    flex: 1;
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .notification-button {
+    position: absolute;
+    bottom: -9px;
+    left: -9px;
+    width: 32px;
+    height: 32px;
+    min-width: auto;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 27px; /* ← tamaño correcto y grande */
+      color: #b30000;
+    }
+
+    &:active {
+      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
+    }
+  }
+}

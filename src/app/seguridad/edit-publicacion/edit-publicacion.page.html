@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <!-- Botón volver -->
+  <div style="position: absolute; top: 16px; left: 16px; z-index: 10;">
+    <ion-button fill="clear" size="small" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" slot="icon-only" style="color: #8b0000; font-size: 24px;"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Título -->
+  <div class="crear-publicacion">
+    <span>Editar publicación</span>
+  </div>
+
+  <!-- Imagen -->
+  <div class="foto-publicacion-container" (click)="seleccionarImagen()">
+    <img [src]="fotoPublicacion" alt="Editar foto" class="foto-publicacion" />
+  </div>
+
+  <!-- Formulario reactivo -->
+  <form [formGroup]="publicacionForm" (ngSubmit)="actualizarPublicacion()">
+
+    <ion-item>
+      <ion-input formControlName="titulo" placeholder="Escribe un título"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea formControlName="descripcion" placeholder="Descripción"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="number" formControlName="montoPaga" placeholder="Total a pagar"></ion-input>
+    </ion-item>
+
+    <div class="region-comuna">
+      <strong>Región Metropolitana</strong>
+      <ion-item>
+        <ion-label color="danger">Comuna</ion-label>
+        <ion-select formControlName="comuna" color="danger" interface="popover" placeholder="Selecciona una comuna">
+          <ion-select-option value="alhue">Alhué</ion-select-option>
+          <ion-select-option value="buin">Buin</ion-select-option>
+          <ion-select-option value="calera_de_tango">Calera de Tango</ion-select-option>
+          <ion-select-option value="cerrillos">Cerrillos</ion-select-option>
+          <ion-select-option value="cerro_navia">Cerro Navia</ion-select-option>
+          <ion-select-option value="colina">Colina</ion-select-option>
+          <ion-select-option value="conchali">Conchalí</ion-select-option>
+          <ion-select-option value="el_bosque">El Bosque</ion-select-option>
+          <ion-select-option value="el_monte">El Monte</ion-select-option>
+          <ion-select-option value="estacion_central">Estación Central</ion-select-option>
+          <ion-select-option value="huechuraba">Huechuraba</ion-select-option>
+          <ion-select-option value="independencia">Independencia</ion-select-option>
+          <ion-select-option value="isla_de_maipo">Isla de Maipo</ion-select-option>
+          <ion-select-option value="la_cisterna">La Cisterna</ion-select-option>
+          <ion-select-option value="la_florida">La Florida</ion-select-option>
+          <ion-select-option value="la_granja">La Granja</ion-select-option>
+          <ion-select-option value="la_pintana">La Pintana</ion-select-option>
+          <ion-select-option value="la_reina">La Reina</ion-select-option>
+          <ion-select-option value="lampa">Lampa</ion-select-option>
+          <ion-select-option value="las_condes">Las Condes</ion-select-option>
+          <ion-select-option value="lo_barnechea">Lo Barnechea</ion-select-option>
+          <ion-select-option value="lo_espejo">Lo Espejo</ion-select-option>
+          <ion-select-option value="lo_prado">Lo Prado</ion-select-option>
+          <ion-select-option value="macul">Macul</ion-select-option>
+          <ion-select-option value="maipu">Maipú</ion-select-option>
+          <ion-select-option value="maria_pinto">María Pinto</ion-select-option>
+          <ion-select-option value="melipilla">Melipilla</ion-select-option>
+          <ion-select-option value="nunoa">Ñuñoa</ion-select-option>
+          <ion-select-option value="padre_hurtado">Padre Hurtado</ion-select-option>
+          <ion-select-option value="paine">Paine</ion-select-option>
+          <ion-select-option value="pedro_aguirre_cerda">Pedro Aguirre Cerda</ion-select-option>
+          <ion-select-option value="penalolen">Peñalolén</ion-select-option>
+          <ion-select-option value="pirque">Pirque</ion-select-option>
+          <ion-select-option value="providencia">Providencia</ion-select-option>
+          <ion-select-option value="pudahuel">Pudahuel</ion-select-option>
+          <ion-select-option value="puente_alto">Puente Alto</ion-select-option>
+          <ion-select-option value="quilicura">Quilicura</ion-select-option>
+          <ion-select-option value="quinta_normal">Quinta Normal</ion-select-option>
+          <ion-select-option value="recoleta">Recoleta</ion-select-option>
+          <ion-select-option value="renca">Renca</ion-select-option>
+          <ion-select-option value="san_bernardo">San Bernardo</ion-select-option>
+          <ion-select-option value="san_jose_de_maipo">San José de Maipo</ion-select-option>
+          <ion-select-option value="san_miguel">San Miguel</ion-select-option>
+          <ion-select-option value="san_joaquin">San Joaquín</ion-select-option>
+          <ion-select-option value="san_ramon">San Ramón</ion-select-option>
+          <ion-select-option value="santiago">Santiago</ion-select-option>
+          <ion-select-option value="talagante">Talagante</ion-select-option>
+          <ion-select-option value="tiltil">Tiltil</ion-select-option>
+          <ion-select-option value="vitacura">Vitacura</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Campo de archivo (oculto) -->
+    <input type="file" hidden #fileInput (change)="seleccionarImagenDesdeInput($event)" />
+
+    <!-- Botón Guardar Cambios -->
+    <ion-button expand="block" color="danger" type="submit" [disabled]="publicacionForm.invalid">
+      Guardar Cambios
+    </ion-button>
+  </form>
+</ion-content>

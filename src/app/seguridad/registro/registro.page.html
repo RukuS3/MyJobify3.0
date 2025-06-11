@@ -1,0 +1,41 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-container">
+    <div class="logo">MYJOBIFY</div>
+    <h2 class="subtitle">Registro</h2>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Ingresa tu Nombre" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Ingresa tu rut sin guión" [(ngModel)]="rut"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Ingresar contraseña" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password2" placeholder="repite tu contraseña" [(ngModel)]="password2"></ion-input>
+    </ion-item>
+
+
+    <ion-button expand="block" fill="clear" class="login-button" (click)="login()">
+      Registrarse
+    </ion-button>
+
+
+  </div>
+</ion-content>

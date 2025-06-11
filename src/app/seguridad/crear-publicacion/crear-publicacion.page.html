@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <ion-button expand="block" fill="clear" class="login-button centrado" [routerLink]="['/add-publicacion']">
+    Crear publicación
+  </ion-button>
+
+  <ion-list *ngIf="publicaciones.length > 0">
+    <ion-card *ngFor="let pub of publicaciones">
+
+      <img
+        *ngIf="pub.agregarfoto"
+        [src]="pub.agregarfoto"
+        alt="Imagen de publicación"
+        class="img-publicacion" />
+
+      <ion-card-header>
+        <ion-card-title>{{ pub.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ pub.nombreUsuario || 'Anónimo' }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Descripción:</strong> {{ pub.descripcion }}</p>
+        <p><strong>Monto a pagar:</strong> ${{ pub.montoPaga }}</p>
+        <p><strong>Comuna:</strong> {{ pub.comuna }}</p>
+        <p><strong>Categoría:</strong> {{ pub.categoria }}</p>
+        <p><strong>Fecha:</strong> {{ pub.fecha | date: 'dd/MM/yyyy, h:mm a' }}</p>
+
+        <ion-buttons>
+          <ion-button fill="clear" color="warning" [routerLink]="['/edit-publicacion', pub.id]">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button fill="clear" color="danger" (click)="confirmarEliminarPublicacion(pub.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-label *ngIf="publicaciones.length === 0" class="mensaje-vacio">
+    <ion-icon name="information-circle-outline" class="icono-info"></ion-icon>
+    No hay publicaciones aún.
+  </ion-label>
+
+</ion-content>
+
+<br>
+<br>
+<br>
+
+<!-- Footer -->
+<app-footer></app-footer>

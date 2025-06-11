@@ -1,0 +1,46 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-title class="logo">MYJOBIFY</ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+
+  
+  <div style="position: absolute; top: 16px; left: 16px; z-index: 10;">
+    <ion-button fill="clear" size="small" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" slot="icon-only" style="color: #8b0000; font-size: 24px;"></ion-icon>
+    </ion-button>
+  </div>
+
+  <img src="https://icon-library.com/images/info-icon-png-transparent/info-icon-png-transparent-6.jpg" alt="MyJobify Logo" style="width: 150px; margin: 20px auto; display: block;" />
+
+
+  <ion-list lines="full">
+    <ion-item button [routerLink]="'/quienes-somos'">
+      <ion-label>¿Quiénes somos?</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item button [routerLink]="'/privacidad-terminos'">
+      <ion-label>Privacidad y seguridad</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item button [routerLink]="'/terminos-condiciones'">
+      <ion-label>Términos y condiciones</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item button [routerLink]="'/contactanos'">
+      <ion-label>Contáctanos</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<!-- Footer -->
+<app-footer></app-footer>

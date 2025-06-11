@@ -1,0 +1,38 @@
+<ion-content class="ion-padding register-content">
+  <div class="register-container">
+    <h1 class="logo">MYJOBIFY</h1>
+    <h2 class="register-title">Crear Cuenta</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="register-form">
+      <ion-input formControlName="rut" placeholder="Ingresa tu RUT sin guión" class="custom-input" type="text"></ion-input>
+      <ion-input formControlName="nombre" placeholder="Ingresa tu nombre" class="custom-input" type="text"></ion-input>
+      <ion-input formControlName="apellido" placeholder="Ingresa tu apellido" class="custom-input" type="text"></ion-input>
+      
+      <!-- Teléfono con prefijo chileno -->
+      <div class="custom-input phone-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/330px-Flag_of_Chile.svg.png" alt="Chile" class="flag-icon" />
+        <span class="flag-prefix">+56 9</span>
+        <input
+          formControlName="telefono"
+          placeholder="12345678"
+          maxlength="8"
+          inputmode="numeric"
+          type="tel"
+          class="phone-input"
+        />
+      </div>
+
+
+      <ion-input formControlName="email" placeholder="Ingresa un correo" class="custom-input" type="email"></ion-input>
+      <ion-input formControlName="password" placeholder="Ingresa contraseña" class="custom-input" type="password"></ion-input>
+
+      <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" class="gradient-button">
+        Registrarse
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" color="medium" routerLink="/auth">
+        Ya tengo cuenta
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,194 @@
+.inicio-content {
+  --background: #ffffff;
+
+  .inicio-container {
+    padding: 10px 16px;
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      box-shadow: 0 8px px rgba(0, 0, 0, 0.1);
+
+      .card-left {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+
+      .card-right img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile-btn {
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .notification-button {
+    position: absolute;
+    bottom: -9px;
+    left: -9px;
+    width: 32px;
+    height: 32px;
+    min-width: auto;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 27px; /* ← tamaño correcto y grande */
+      color: #b30000;
+    }
+
+    &:active {
+      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
+    }
+  }
+
+.button-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Compensa el header y footer con altura reducida */
+  height: calc(100vh - 112px); /* Ajusta según tu header/footer (56px cada uno aprox) */
+}
+
+.login-button {
+  background: linear-gradient(to right, #ff8a8a, #8b0000); 
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 8px 20px;
+  font-size: 1rem;
+  width: auto; /* cambia de 100% a auto para hacerlo más pequeño */
+  min-width: 180px;
+} 
+
+.login-button.personalizado {
+  width: auto;             /* Quita el ancho total */
+  min-width: 200px;        /* Tamaño mínimo */
+  margin: 20px auto;       /* Centra horizontalmente */
+  display: block;          /* Necesario para que margin:auto funcione */
+}
+
+ion-button.login-button.centrado {
+  display: block !important;
+  margin: 15px auto !important;
+  width: auto !important;
+  min-width: 100px;   /* antes: 180px */
+  max-width: 180px;   /* antes: 220px */
+  padding: 4px 10px;  /* antes: 10px 20px */
+  font-size: 15px;  /* un poco más pequeño */
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 4px;
+}
+
+
+.img-publicacion {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.mensaje-vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: #8b0000; // gris elegante
+  padding: 30px 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 20px;
+
+  .icono-info {
+    font-size: 2.5rem;
+    color: #a50202;
+    margin-bottom: 10px;
+  }
+}
+
+::ng-deep ion-alert.custom-alert {
+  --background: #ffffff;
+  --width: 90%;
+  --max-width: 320px;
+  --border-radius: 16px;
+  --box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+}
+
+::ng-deep ion-alert.custom-alert .alert-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d9534f; // rojo para advertencia
+  text-align: center;
+}
+
+::ng-deep ion-alert.custom-alert .alert-message {
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  padding: 0 10px;
+}
+
+::ng-deep ion-alert.custom-alert .alert-button {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+::ng-deep ion-alert.custom-alert .alert-button.alert-button-cancel {
+  color: #6c757d; // gris
+}
+
+::ng-deep ion-alert.custom-alert .alert-button.alert-button-confirm {
+  color: #dc3545; // rojo intenso
+}

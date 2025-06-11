@@ -1,0 +1,49 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    <ion-title class="logo" slot="start">ADMIN</ion-title>
+    <ion-buttons slot="end">
+      <div class="avatar-container">
+        <ion-button fill="clear" [routerLink]="'/auth'" class="profile-btn">
+          <ion-avatar class="profile-avatar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzGJt3MmZ_kzaVlppF_FRCLQG7juptHoFqew&s" alt="Perfil" />
+          </ion-avatar>
+        </ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Botón para volver atrás -->
+  <ion-button fill="clear" size="small" (click)="goBack()" style="margin-bottom: 8px;">
+    <ion-icon name="arrow-back-outline" slot="start" style="color: #8b0000; font-size: 22px;"></ion-icon>
+    Volver
+  </ion-button>
+
+  <ng-container *ngIf="denuncia">
+    <h2>Denunciado: {{ denuncia.denunciadoNombre || 'Usuario desconocido' }}</h2>
+    <p><strong>Detalle:</strong> {{ denuncia.descripcion || denuncia.detalle || 'No disponible' }}</p>
+    <p><strong>Motivo:</strong> {{ denuncia.motivo || 'Sin motivo' }}</p>
+    <p><strong>Fecha:</strong> {{ denuncia.fecha | date:'medium' }}</p>
+
+    <!-- Prueba adjunta con imagen al lado -->
+    <ng-container *ngIf="denuncia.pruebaUrl; else sinPrueba">
+      <p style="display: flex; align-items: center;">
+        <strong style="margin-right: 12px;">Prueba adjunta:</strong>
+
+        <img [src]="denuncia.pruebaUrl" 
+             alt="Prueba adjunta"
+             style="max-width: 150px; max-height: 100px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);" />
+      </p>
+    </ng-container>
+
+    <ng-template #sinPrueba>
+      <p><strong>Prueba adjunta:</strong> No disponible.</p>
+    </ng-template>
+
+    <ion-button color="success" expand="block" (click)="aprobarDenuncia()">Aprobar</ion-button>
+    <ion-button color="danger" expand="block" (click)="rechazarDenuncia()">Rechazar</ion-button>
+  </ng-container>
+
+</ion-content>
