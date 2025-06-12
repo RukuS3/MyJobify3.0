@@ -29,13 +29,13 @@ export class InicioPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
-    // Mostrar siempre el modal para pruebas
+    // DESPUES DE TENER LISTO ESTO BORRAR ESTE CODIGO PARA QUE NO LO MUESTRE SIEMPRE
     const modal = await this.modalCtrl.create({
       component: ModalBienvenidaComponent,
       backdropDismiss: false,
     });
     await modal.present();
-
+    // Y LO MUESTRE SOLAMENTE UNA VEZ SI ES QUE APRIETA "NO VOLVER A MOSTRAR"
     
     const mostrarBienvenida = localStorage.getItem('mostrarBienvenida');
     console.log('mostrarBienvenida:', mostrarBienvenida);
