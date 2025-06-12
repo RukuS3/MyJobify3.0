@@ -2,7 +2,9 @@
   <div class="slide-content">
     <img [src]="slides[slideIndex].img" alt="Slide Image" class="slide-image" />
     <h3 class="slide-title">{{ slides[slideIndex].titulo }}</h3>
-    <p class="slide-description">{{ slides[slideIndex].descripcion }}</p>
+    <p class="slide-description" [innerHTML]="getDescripcionFormateada()"></p>
+
+
   </div>
 
   <div class="navigation-buttons">

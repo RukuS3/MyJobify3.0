@@ -13,19 +13,23 @@ export class ModalBienvenidaComponent {
   // Aquí defines tus imágenes, títulos y descripciones
   slides = [
     {
-      img: 'assets/foto1.jpeg',
-      titulo: 'Cómo valorar un trabajo',
-      descripcion: 'Aprende a dar una calificación justa y honesta a los trabajos realizados.'
+      img: 'assets/valoracion.png',
+      titulo: 'Cómo valorar un trabajador',
+      descripcion: '1. Primero debes dar clic en "¿Tarea terminada?".'
     },
     {
-      img: 'assets/foto2.jpg',
+      img: 'assets/valoracion1.png',
       titulo: 'Importancia de las valoraciones',
-      descripcion: 'Las valoraciones ayudan a mejorar la calidad y confianza en el sistema.'
+      descripcion: '1. Selecionas las estrellas. \n 2. Dejar un comentario adecuado. \n 3.Enviar tu calificación' 
     },
     // Agrega más slides si quieres
   ];
 
   constructor(private modalCtrl: ModalController) {}
+
+  getDescripcionFormateada(): string {
+  return this.slides[this.slideIndex].descripcion.replace(/\n/g, '<br>');
+}
 
   anterior() {
     if (this.slideIndex > 0) {

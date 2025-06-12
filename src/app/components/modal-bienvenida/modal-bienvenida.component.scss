@@ -18,8 +18,10 @@
 }
 
 .slide-image {
-  width: 120px;
-  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px; // puedes aumentar este valor
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 .slide-title {
@@ -37,12 +39,19 @@
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 16px;
+  margin-top: 1rem;
+  ion-button {
+    color: white;
+    --background: #c90000; // Rojo personalizado
+    --color: white;
+    --box-shadow: none;
+    border-radius: 8px;
+    padding: 0 16px;
+  }
 }
 
 .checkbox-container {
+  margin-top: 5px;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
@@ -56,15 +65,15 @@
   color: #666; /* color texto normal */
 
   ion-checkbox {
-    --checkmark-color: #28a745; /* color verde para el check */
+    --checkmark-color: #07611c; /* color verde para el check */
   }
 
   &.checked {
-    color: #28a745; /* texto verde cuando está activo */
+    color: #07611c; /* texto verde cuando está activo */
     
     ion-checkbox {
-      --background: #28a745;
-      --border-color: #28a745;
+      --background: #07611c;
+      --border-color: #07611c;
     }
   }
 }
@@ -74,7 +83,7 @@
 }
 
 ion-button {
-  --background: #3880ff; // Azul Ionic por defecto
+  --background: #1fb40b; // Azul Ionic por defecto
   --color: white; // Color del texto
   width: 100%;
   margin-top: 8px;
