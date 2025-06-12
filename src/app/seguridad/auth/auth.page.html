@@ -21,10 +21,15 @@
         type="password"
         class="custom-input"
       ></ion-input>
-
-      <!-- Enlace contraseña -->
-      <div class="forgot-password">
-        <a routerLink="/forgot-password">Olvide mi contraseña</a>
+      <!-- Recordarme y Olvidé mi contraseña en una fila -->
+      <div class="login-options">
+        <div class="remember-me">
+          <ion-checkbox formControlName="rememberMe" name="rememberMe" class="green-checkbox"></ion-checkbox>
+          <ion-label>Recordarme</ion-label>
+        </div>
+        <div class="forgot-password">
+          <a routerLink="/forgot-password">Olvidé mi contraseña</a>
+        </div>
       </div>
 
       <!-- Texto cuenta -->

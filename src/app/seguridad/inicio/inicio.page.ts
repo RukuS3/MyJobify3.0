@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+import { ModalBienvenidaComponent } from '../../components/modal-bienvenida/modal-bienvenida.component';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
-  standalone: false
 })
 export class InicioPage implements OnInit, OnDestroy {
   publicaciones: any[] = [];
@@ -23,16 +24,45 @@ export class InicioPage implements OnInit, OnDestroy {
     private afs: AngularFirestore,
     private router: Router,
     private auth: AngularFireAuth,
+    private modalCtrl: ModalController
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    // Mostrar siempre el modal para pruebas
+    const modal = await this.modalCtrl.create({
+      component: ModalBienvenidaComponent,
+      backdropDismiss: false,
+    });
+    await modal.present();
+
+    
+    const mostrarBienvenida = localStorage.getItem('mostrarBienvenida');
+    console.log('mostrarBienvenida:', mostrarBienvenida);
+
+    if (mostrarBienvenida !== 'false') {
+      console.log('Mostrando modal de bienvenida...');
+      const modal = await this.modalCtrl.create({
+        component: ModalBienvenidaComponent,
+        backdropDismiss: false,
+      });
+
+      modal.onDidDismiss().then(({ data }) => {
+        // Si el usuario marca "no mostrar más", guardamos la preferencia
+        if (data?.noMostrarMas) {
+          localStorage.setItem('mostrarBienvenida', 'false');
+        }
+      });
+
+      await modal.present();
+    }
+
     // Cargar publicaciones
     const pubSub = this.afs.collection('Publicacion', ref => ref.orderBy('fecha', 'desc'))
       .snapshotChanges()
       .subscribe(data => {
         this.publicaciones = [];
 
-        // Por cada publicación, armamos el objeto y pedimos calificaciones
         data.forEach(async doc => {
           const pub = doc.payload.doc.data() as any;
           const id = doc.payload.doc.id;
@@ -45,7 +75,6 @@ export class InicioPage implements OnInit, OnDestroy {
           };
 
           if (item.usuarioId) {
-            // Suscribirse a las calificaciones del usuario para cada publicación
             const califSub = this.afs.collection(`usuarios/${item.usuarioId}/calificaciones`)
               .valueChanges()
               .subscribe((calificaciones: any[]) => {
@@ -66,7 +95,7 @@ export class InicioPage implements OnInit, OnDestroy {
 
     this.subs.push(pubSub);
 
-    // Cargar favoritos del usuario actual
+    // Cargar favoritos
     this.auth.currentUser.then(user => {
       if (user) {
         const favSub = this.afs.collection(`Favoritos/${user.uid}/publicaciones`)
@@ -80,7 +109,6 @@ export class InicioPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Limpiar todas las suscripciones
     this.subs.forEach(sub => sub.unsubscribe());
   }
 
@@ -134,19 +162,11 @@ export class InicioPage implements OnInit, OnDestroy {
     const entero = Math.floor(promedio);
     const decimal = promedio - entero;
 
-    for (let i = 0; i < entero; i++) {
-      estrellas.push('star');
-    }
+    for (let i = 0; i < entero; i++) estrellas.push('star');
+    if (decimal >= 0.25 && decimal < 0.75) estrellas.push('star-half');
+    else if (decimal >= 0.75) estrellas.push('star');
 
-    if (decimal >= 0.25 && decimal < 0.75) {
-      estrellas.push('star-half');
-    } else if (decimal >= 0.75) {
-      estrellas.push('star');
-    }
-
-    while (estrellas.length < 5) {
-      estrellas.push('star-outline');
-    }
+    while (estrellas.length < 5) estrellas.push('star-outline');
 
     return estrellas;
   }

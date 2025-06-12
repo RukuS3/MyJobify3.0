@@ -48,11 +48,33 @@
   margin-bottom: 4px;
 }
 
+.green-checkbox {
+  --checkbox-background-checked: #28a745; // verde
+  --checkbox-border-color-checked: #28a745;
+  --checkbox-color: white;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
 .forgot-password a {
   color: #a10000;
+  text-decoration: none;
   font-family: 'Arial', sans-serif;
   font-size: 0.9rem;
-  text-decoration: none;
 }
 
 .register-text {

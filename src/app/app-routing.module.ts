@@ -5,7 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',  
+    redirectTo: 'apertura',  
     pathMatch: 'full',
   },
   {
@@ -106,7 +106,12 @@ const routes: Routes = [
   {
     path: 'detalle-pub-admin/:id',
     loadChildren: () => import('./seguridad/admin/detalle-pub-admin/detalle-pub-admin.module').then(m => m.DetallePubAdminPageModule)
+  },
+  {
+    path: 'apertura',
+    loadChildren: () => import('./seguridad/apertura/apertura.module').then( m => m.AperturaPageModule)
   }
+
 
 
 ];
