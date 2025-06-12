@@ -101,3 +101,41 @@
   
   font-size: 16px;
 }
+
+
+.estrellas-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.rating-num {
+  margin-left: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.sin-calificacion {
+  color: #999;
+  font-size: 13px;
+}
+
+.calificacion-favorito {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+
+  .estrellas-container {
+    margin: 0;
+  }
+
+  .heart-btn {
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
+}

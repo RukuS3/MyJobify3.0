@@ -51,12 +51,12 @@
           display: flex;
           align-items: center;
           margin-top: 4px;
-          //Estrella
+
           ion-icon {
             color: gold;
             margin-right: 4px;
           }
-          //Numero de calificacion
+
           h5 {
             font-weight: bold;
           }
@@ -136,12 +136,12 @@
     justify-content: center;
 
     ion-icon {
-      font-size: 27px; /* ← tamaño correcto y grande */
+      font-size: 27px;
       color: #b30000;
     }
 
     &:active {
-      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
+      background-color: rgba(179, 0, 0, 0.1);
     }
   }
 }
@@ -149,51 +149,74 @@
 .profile-section {
   margin-top: 30px;
   display: flex;
-  flex-direction: column; /* para que el botón quede debajo */
+  flex-direction: column;
   align-items: center;
+  position: relative;
 
-  ion-button {
-    margin-top: 12px;
-    width: 60%;
-    max-width: 200px;
-    --background: #b30000;
-    color: white;
+  .avatar-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 
-    ion-icon {
-      margin-left: 8px;
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .overlay-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 12px;
+      padding: 4px 0;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+
+    /* Corona de estrellas arriba de la foto */
+    .stars-corona {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      z-index: 10;
+
+      ion-icon {
+        color: #f4c150; /* dorado */
+        font-size: 22px;
+        filter: drop-shadow(0 0 1px #b37700);
+      }
     }
   }
-}
 
-.avatar-container {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
+  /* Texto calificación debajo de la foto */
+  .calificacion-texto {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #b30000;
+  }
 
-.profile-picture {
-  width: 120px;
-  height: 120px;
-  border: 2px solid #ccc;
-}
-
-.overlay-text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 12px;
-  padding: 4px 0;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
+  /* Mensaje si no tiene calificación */
+  .sin-calificacion {
+    margin-top: 8px;
+    font-style: italic;
+    font-size: 14px;
+    color: #888888;
+  }
 }
 
 .stars-rating ion-icon {
   cursor: default;
 }
-
 
 ::ng-deep ion-alert.custom-alert {
   --background: #ffffff;
@@ -207,7 +230,7 @@
 ::ng-deep ion-alert.custom-alert .alert-title {
   font-size: 18px;
   font-weight: bold;
-  color: #d9534f; // rojo para advertencia
+  color: #d9534f;
   text-align: center;
 }
 
@@ -224,9 +247,9 @@
 }
 
 ::ng-deep ion-alert.custom-alert .alert-button.alert-button-cancel {
-  color: #6c757d; // gris
+  color: #6c757d;
 }
 
 ::ng-deep ion-alert.custom-alert .alert-button.alert-button-confirm {
-  color: #cc0909; // rojo intenso
+  color: #cc0909;
 }

@@ -26,6 +26,8 @@ export class MiperfilPage implements OnInit {
 
   uid: string = '';
 
+  promedioCalificacion: number | null = null;
+
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -58,6 +60,35 @@ export class MiperfilPage implements OnInit {
         this.fotoPerfil = data.fotoUrl || this.fotoPerfil;
       }
     });
+
+    // Cargar calificaciones y calcular promedio
+    this.afs.collection(`usuarios/${this.uid}/calificaciones`).valueChanges().subscribe((calificaciones: any[]) => {
+      if (calificaciones.length > 0) {
+        const total = calificaciones.reduce((sum, c) => sum + (c.calificacion || 0), 0);
+        this.promedioCalificacion = Number((total / calificaciones.length).toFixed(1));
+      } else {
+        this.promedioCalificacion = null;
+      }
+    });
+  }
+
+  obtenerEstrellas(promedio: number): string[] {
+    const estrellas: string[] = [];
+    const enteras = Math.floor(promedio);
+    const decimal = promedio - enteras;
+
+    for (let i = 0; i < enteras; i++) {
+      estrellas.push('star');
+    }
+    if (decimal >= 0.25 && decimal < 0.75) {
+      estrellas.push('star-half');
+    } else if (decimal >= 0.75) {
+      estrellas.push('star');
+    }
+    while (estrellas.length < 5) {
+      estrellas.push('star-outline');
+    }
+    return estrellas;
   }
 
   async cambiarFotoPerfil() {

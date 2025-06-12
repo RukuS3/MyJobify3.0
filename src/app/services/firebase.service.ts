@@ -7,18 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { DocumentData } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
-interface Denuncia {
-  id?: string;
-  fecha?: any; // Firebase Timestamp u objeto Date
-  [key: string]: any; // otros campos dinámicos
-}
-
-interface ReportePublicacion {
-  id?: string;
-  fechaReporte?: any; // Firebase Timestamp u objeto Date
-  [key: string]: any;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -61,11 +49,36 @@ export class FirebaseService {
           .doc(solicitudDoc.id)
           .delete();
       }
+
+      // Eliminar de favoritos de todos los usuarios
+      const favoritosSnapshot = await this.firestore.collection('Favoritos').get().toPromise();
+      for (const userDoc of favoritosSnapshot.docs) {
+        const userId = userDoc.id;
+
+        const favDoc = await this.firestore
+          .collection('Favoritos')
+          .doc(userId)
+          .collection('publicaciones')
+          .doc(idPublicacion)
+          .get()
+          .toPromise();
+
+        if (favDoc.exists) {
+          await this.firestore
+            .collection('Favoritos')
+            .doc(userId)
+            .collection('publicaciones')
+            .doc(idPublicacion)
+            .delete();
+        }
+      }
+
     } catch (error) {
-      console.error('Error eliminando publicación y solicitudes relacionadas:', error);
+      console.error('Error eliminando publicación y datos relacionados:', error);
       throw error;
     }
   }
+
 
   // Subir imagen
   subirImagen(file: File): Promise<string> {
@@ -117,10 +130,7 @@ export class FirebaseService {
       .update({ estado });
   }
 
-  // ----------------------
-  // Métodos para Admin Panel y denuncias
-  // ----------------------
-
+  // Denuncias
   obtenerDenuncias() {
     return this.firestore.collection('denunciasUsuarios', ref => ref.orderBy('fecha', 'desc'))
       .snapshotChanges()
@@ -178,19 +188,17 @@ export class FirebaseService {
     return this.firestore.collection('usuarios').doc(uid).collection('notificaciones').add(notificacion);
   }
 
-  async obtenerNombreUsuario(uid: string): Promise<string> {
+  obtenerNombreUsuario = async (uid: string): Promise<string> => {
     try {
       const doc = await this.firestore.collection('usuarios').doc(uid).get().toPromise();
       if (doc.exists) {
         const data = doc.data() as { nombre?: string; apellido?: string };
-        const nombre = data?.nombre || '';
-        const apellido = data?.apellido || '';
-        return `${nombre} ${apellido}`.trim() || 'Sin nombre';
+        return `${data?.nombre || ''} ${data?.apellido || ''}`.trim() || 'Sin nombre';
       } else {
         return 'Usuario no encontrado';
       }
     } catch (error) {
-      console.error('Error obteniendo nombre completo de usuario:', error);
+      console.error('Error obteniendo nombre:', error);
       return 'Error al obtener nombre';
     }
   }
@@ -202,11 +210,8 @@ export class FirebaseService {
 
   obtenerPublicacionPorId(id: string): Promise<any> {
     return this.firestore.collection('Publicacion').doc(id).get().toPromise().then(doc => {
-      if (doc.exists) {
-        return doc.data();
-      } else {
-        throw new Error('Publicación no encontrada');
-      }
+      if (doc.exists) return doc.data();
+      else throw new Error('Publicación no encontrada');
     });
   }
 
@@ -217,14 +222,45 @@ export class FirebaseService {
   async obtenerUsuarioPorUid(uid: string): Promise<any> {
     try {
       const doc = await this.firestore.collection('usuarios').doc(uid).get().toPromise();
-      if (doc.exists) {
-        return doc.data();
-      } else {
-        return null;
-      }
+      return doc.exists ? doc.data() : null;
     } catch (error) {
       console.error('Error obteniendo usuario:', error);
       return null;
     }
+  }
+
+  // FAVORITOS
+
+  agregarAFavoritos(uid: string, publicacion: any) {
+    const favRef = this.firestore.collection('Favoritos')
+      .doc(uid)
+      .collection('publicaciones')
+      .doc(publicacion.id);
+
+    return favRef.set(publicacion);
+  }
+
+  eliminarDeFavoritos(uid: string, publicacionId: string) {
+    return this.firestore.collection('Favoritos')
+      .doc(uid)
+      .collection('publicaciones')
+      .doc(publicacionId)
+      .delete();
+  }
+
+  esFavorito(uid: string, publicacionId: string): Observable<boolean> {
+    return this.firestore.collection('Favoritos')
+      .doc(uid)
+      .collection('publicaciones')
+      .doc(publicacionId)
+      .valueChanges()
+      .pipe(map(doc => !!doc));
+  }
+
+  obtenerFavoritos(uid: string): Observable<any[]> {
+    return this.firestore.collection('Favoritos')
+      .doc(uid)
+      .collection('publicaciones')
+      .valueChanges({ idField: 'id' });
   }
 }

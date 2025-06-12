@@ -20,19 +20,50 @@ export class SavePublicacionPage {
   verDetalle(id: string) {
   this.router.navigate(['/trabajos/detalle-publicacion', id]);
 }
+
   ionViewWillEnter() {
     this.auth.currentUser.then(user => {
       if (user) {
         this.afs.collection(`Favoritos/${user.uid}/publicaciones`)
           .snapshotChanges()
-          .subscribe(data => {
-            this.publicacionesGuardadas = data.map(doc => {
+          .subscribe(async data => {
+            const favoritosConDatos = await Promise.all(data.map(async doc => {
               const pub = doc.payload.doc.data() as any;
               const id = doc.payload.doc.id;
-              return { id, ...pub };
-            });
+
+              const publicacionDoc = await this.afs.collection('Publicacion').doc(id).get().toPromise();
+              if (publicacionDoc.exists) {
+                const publicacionData = publicacionDoc.data() as any;
+
+                let nombreUsuario = '';
+                if (publicacionData?.usuarioId) {
+                  const usuarioDoc = await this.afs.collection('usuarios').doc(publicacionData.usuarioId).get().toPromise();
+                  if (usuarioDoc.exists) {
+                    const u = usuarioDoc.data() as any;
+                    nombreUsuario = `${u?.nombre || ''} ${u?.apellido || ''}`.trim();
+                  }
+                }
+
+                return {
+                  id,
+                  ...pub,
+                  titulo: publicacionData?.titulo || pub.titulo,
+                  comuna: publicacionData?.comuna || pub.comuna,
+                  descripcion: publicacionData?.descripcion || '',
+                  fecha: publicacionData?.fecha ? publicacionData.fecha.toDate() : null,
+                  nombreUsuario
+                };
+              } else {
+                await this.afs.collection(`Favoritos/${user.uid}/publicaciones`).doc(id).delete();
+                return null;
+              }
+            }));
+
+            this.publicacionesGuardadas = favoritosConDatos.filter(pub => pub !== null);
           });
       }
     });
   }
+
+
 }

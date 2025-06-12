@@ -1,6 +1,6 @@
 .no-favs {
   text-align: center;
-  margin-top: 50%;
+  margin-top: 2rem;
   color: gray;
 
   ion-icon {
@@ -13,41 +13,68 @@
   }
 }
 
-.card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  margin: 15px 10px;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); // sombra más suave
+ion-list {
+  margin: 0 10px;
 }
 
-// ✅ Separación sutil entre publicaciones guardadas
-.card + .card {
-  margin-top: 20px;
-  border-top: 1px solid #e0e0e0; // línea sutil
-  padding-top: 15px;
+ion-item {
+  --background: #fff;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --ion-item-padding-start: 12px;
+  --ion-item-padding-end: 12px;
+
+  ion-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+    }
+  }
+
+  ion-label {
+    h2 {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #b30000;
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 2px 0;
+      font-size: 0.9rem;
+      color: #333;
+
+      &.descripcion-corta {
+        font-style: italic;
+        color: #666;
+      }
+
+      strong {
+        color: #444;
+      }
+
+      small {
+        color: #999;
+      }
+    }
+  }
 }
 
-.card-left {
-  flex: 1;
-}
-
-.card-right img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-// Fondo general del contenido
 .save-publicacion-content {
-  background-color: #f9f9f9; // fondo suave detrás de las tarjetas
+  background-color: #f9f9f9;
+  padding-top: 10px;
 }
 
-//Parte superior de la pagina
+/* Mantener estilos del header y footer si los necesitas */
+
 .custom-header {
   --background: #ffffff !important;
   box-shadow: none;
@@ -142,4 +169,88 @@
       font-size: 1.5rem;
     }
   }
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b30000;
+  margin: 1.5rem 1rem 1rem 1rem;
+  text-align: center;
+}
+
+.page-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fef3f3;
+  border-bottom: 3px solid #b30000;
+  padding: 0.8rem 0;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgb(179 0 0 / 0.1);
+  
+  ion-icon {
+    font-size: 28px;
+  }
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #b30000;
+  margin: 0;
+}
+
+.compact-card {
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  --min-height: 80px;
+  --border-radius: 8px;
+  margin: 8px 10px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #eee;
+}
+
+.thumbnail-small {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.compact-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.compact-card p {
+  font-size: 0.85rem;
+  margin: 2px 0;
+  color: #555;
+}
+
+.descripcion-corta {
+  color: #666;
+  font-style: italic;
+}
+
+.no-favs {
+  text-align: center;
+  margin-top: 2rem;
+  color: gray;
+
+  ion-icon {
+    font-size: 48px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+.save-publicacion-content {
+  background-color: #f9f9f9;
 }

@@ -21,6 +21,7 @@
         interface="popover" 
         placeholder="Selecciona" 
         class="select-categoria">
+        <ion-select-option value="Otros">Otros</ion-select-option>
         <ion-select-option value="todas">Todos</ion-select-option>
         <ion-select-option value="electricista">Electricista</ion-select-option>
         <ion-select-option value="plomero">Plomero</ion-select-option>
@@ -39,7 +40,7 @@
       </ion-select>
     </ion-item>
 
-    <!-- Lista de publicaciones filtradas y limitadas -->
+    <!-- Lista de publicaciones -->
     <div *ngFor="let item of publicacionesFiltradas | slice:0:limite" class="card" (click)="verDetalle(item.id)">
       <div class="card-left">
         <h3>{{ item.titulo }}</h3>
@@ -48,10 +49,27 @@
           Pago estimado: {{ item.montoPaga | currency:'CLP':'symbol':'1.0-0' }}
         </p>
 
-        <ion-button fill="clear" class="heart-btn" (click)="guardarPublicacion(item); $event.stopPropagation()">
-          <ion-icon [name]="estaGuardada(item) ? 'heart' : 'heart-outline'" color="danger"></ion-icon>
-        </ion-button>
+        <!-- Estrellas + botón heart -->
+        <div class="calificacion-favorito">
+          <div class="estrellas-container">
+            <ng-container *ngIf="item.promedioCalificacion !== null && item.promedioCalificacion !== undefined; else sinCalificacion">
+              <ion-icon 
+                *ngFor="let estrella of obtenerEstrellas(item.promedioCalificacion)" 
+                [name]="estrella" 
+                color="warning">
+              </ion-icon>
+              <span class="rating-num">{{ item.promedioCalificacion }}</span>
+            </ng-container>
+            <ng-template #sinCalificacion>
+              <span class="sin-calificacion">Sin calificaciones</span>
+            </ng-template>
+          </div>
+          <ion-button fill="clear" class="heart-btn" (click)="guardarPublicacion(item); $event.stopPropagation()">
+            <ion-icon [name]="estaGuardada(item) ? 'heart' : 'heart-outline'" color="danger"></ion-icon>
+          </ion-button>
+        </div>
       </div>
+
       <div class="card-right">
         <img [src]="item.agregarfoto" alt="Imagen" class="publicacion-img" *ngIf="item.agregarfoto" />
       </div>
@@ -63,10 +81,6 @@
     </ion-infinite-scroll>
 
   </div>
-
-
-  
 </ion-content>
 
-<!-- Footer -->
 <app-footer></app-footer>

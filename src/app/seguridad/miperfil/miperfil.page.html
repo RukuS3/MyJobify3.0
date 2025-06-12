@@ -20,11 +20,28 @@
   <!-- Foto de perfil con texto para cambiar -->
   <div class="profile-section ion-text-center" style="margin-bottom: 10px;">
     <div class="avatar-container" (click)="cambiarFotoPerfil()" style="display: inline-block; cursor: pointer; position: relative;">
+      <!-- Corona de estrellas arriba -->
+      <div class="stars-corona" *ngIf="promedioCalificacion !== null && promedioCalificacion > 0">
+        <ng-container *ngFor="let estrella of obtenerEstrellas(promedioCalificacion)">
+          <ion-icon [name]="estrella"></ion-icon>
+        </ng-container>
+      </div>
+
       <ion-avatar class="profile-picture" style="width: 120px; height: 120px;">
         <img [src]="fotoPerfil" alt="Foto de perfil" style="width: 100%; height: 100%; border-radius: 50%;">
       </ion-avatar>
       <div class="overlay-text">Cambiar foto</div>
     </div>
+
+    <!-- Texto calificación debajo de la foto -->
+    <p class="calificacion-texto" *ngIf="promedioCalificacion !== null && promedioCalificacion > 0">
+      Calificación: {{ promedioCalificacion }}
+    </p>
+
+    <!-- Mensaje si no tiene calificación -->
+    <p class="sin-calificacion" *ngIf="!promedioCalificacion || promedioCalificacion === 0">
+      Aún no tienes calificaciones
+    </p>
 
     <!-- Botón de cerrar sesión -->
     <ion-button expand="block" color="danger" size="small" (click)="logout()" style="margin-top: 10px;">
@@ -32,7 +49,6 @@
       <ion-icon name="log-out-outline" slot="end"></ion-icon>
     </ion-button>
   </div>
-
 
   <ion-list lines="full">
 
@@ -69,22 +85,6 @@
       ></ion-input>
       <ion-buttons slot="end">
         <ion-button fill="clear" size="small" (click)="editandoCorreo = !editandoCorreo">
-          <ion-icon name="create-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
-
-    <!-- Dirección -->
-    <ion-item>
-      <ion-label position="stacked">Dirección</ion-label>
-      <ion-input
-        type="text"
-        [readonly]="!editandoDireccion"
-        [value]="direccion"
-        (ionInput)="direccion = $event.detail.value"
-      ></ion-input>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" size="small" (click)="editandoDireccion = !editandoDireccion">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </ion-buttons>

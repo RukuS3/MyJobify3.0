@@ -1,29 +1,34 @@
 <app-header></app-header>
 
-<!-- Cuerpo de la página -->
 <ion-content class="save-publicacion-content" [fullscreen]="true">
   <div class="inicio-container">
 
-    <!-- Mostrar mensaje si no hay publicaciones -->
-    <div *ngIf="publicacionesGuardadas.length === 0" class="no-favs">
+    <!-- Título mejorado con icono -->
+    <div class="page-title-container">
+      <ion-icon name="bookmark" color="danger" size="large"></ion-icon>
+      <h1 class="page-title">Guardados</h1>
+    </div>
+
+    <div *ngIf="publicacionesGuardadas.length === 0" class="no-favs" style="text-align:center; margin-top: 2rem;">
       <ion-icon name="heart-outline" color="medium" size="large"></ion-icon>
       <p>No tienes publicaciones guardadas aún.</p>
     </div>
 
-    <!-- Publicaciones guardadas con clic para ver detalle -->
-    <div *ngFor="let item of publicacionesGuardadas" class="card" (click)="verDetalle(item.id)">
-      <div class="card-left">
-        <h3>{{ item.titulo }}</h3>
-        <p>{{ item.comuna }}</p>
-      </div>
-      <div class="card-right">
-        <img [src]="item.agregarfoto" alt="imagen" *ngIf="item.agregarfoto">
-      </div>
-    </div>
+    <ion-list>
+      <ion-item button *ngFor="let item of publicacionesGuardadas" (click)="verDetalle(item.id)" class="compact-card">
+        <ion-thumbnail slot="start" *ngIf="item.agregarfoto" class="thumbnail-small">
+          <img [src]="item.agregarfoto" alt="Imagen publicación">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.titulo }}</h2>
+          <p><strong>Comuna:</strong> {{ item.comuna }}</p>
+          <p *ngIf="item.nombreUsuario"><strong>Publicado por:</strong> {{ item.nombreUsuario }}</p>
+          <p *ngIf="item.fecha"><small>Publicado: {{ item.fecha | date:'mediumDate' }}</small></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
 
   </div>
 </ion-content>
 
-<!-- Footer -->
 <app-footer></app-footer>
-
