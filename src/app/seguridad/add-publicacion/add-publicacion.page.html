@@ -55,10 +55,16 @@
     </ion-text>
 
     <ion-item>
-      <ion-input type="number" formControlName="montoPaga" placeholder="Total a pagar en CLP"></ion-input>
+      <ion-input
+        type="text"
+        formControlName="montoPaga"
+        placeholder="Total a pagar en CLP"
+        (ionInput)="onMontoChange($event)">
+      </ion-input>
     </ion-item>
+    
     <ion-text color="danger" *ngIf="publicacionForm.get('montoPaga')?.touched && publicacionForm.get('montoPaga')?.invalid">
-      El monto debe ser mayor o igual a 0.
+      El monto debe ser mayor a 0.
     </ion-text>
 
     <div class="region-comuna">

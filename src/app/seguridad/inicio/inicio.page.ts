@@ -144,13 +144,28 @@ export class InicioPage implements OnInit, OnDestroy {
   }
 
   get publicacionesFiltradas() {
-    const filtro = this.filtroTexto.toLowerCase();
-    return this.publicaciones
-      .filter(pub =>
-        (this.categoriaSeleccionada === 'todas' || pub.categoria === this.categoriaSeleccionada) &&
-        (!filtro || pub.titulo.toLowerCase().includes(filtro) || pub.comuna.toLowerCase().includes(filtro))
-      );
+    const normalizar = (texto: string): string =>
+      texto
+        .toLowerCase()
+        .normalize('NFD')                 // Separa letras con tilde
+        .replace(/[\u0300-\u036f]/g, '')  // Elimina tildes
+        .trim();                          // Quita espacios al inicio/final
+  
+    const filtro = normalizar(this.filtroTexto);
+  
+    return this.publicaciones.filter(pub => {
+      const titulo = normalizar(pub.titulo || '');
+      const comuna = normalizar(pub.comuna || '');
+      const categoria = pub.categoria || '';
+  
+      return (
+        (this.categoriaSeleccionada === 'todas' || categoria === this.categoriaSeleccionada) &&
+        (!filtro || filtro.split(' ').every(palabra =>
+          titulo.includes(palabra) || comuna.includes(palabra)
+        )));
+    });
   }
+  
 
   cargarMas(event: any) {
     setTimeout(() => {

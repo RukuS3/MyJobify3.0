@@ -24,7 +24,6 @@ export class AddPublicacionPage implements OnInit {
   stream: MediaStream | null = null;
   mostrandoVideo: boolean = false;
 
-  // Variables para manejar múltiples cámaras
   devices: MediaDeviceInfo[] = [];
   currentDeviceIndex = 0;
 
@@ -36,18 +35,32 @@ export class AddPublicacionPage implements OnInit {
     private afAuth: AngularFireAuth,
     private actionSheetController: ActionSheetController
   ) {
+    // Formulario reactivo con validaciones
     this.publicacionForm = this.fb.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      montoPaga: ['', [Validators.required, Validators.min(0)]],
+      montoPaga: ['', [Validators.required, Validators.min(1)]], // monto obligatorio y mayor a 0
       comuna: ['', Validators.required],
       categoria: ['', Validators.required],
     });
   }
 
   ngOnInit() {
-    // No abrimos cámara automáticamente, sólo listamos dispositivos para cambiar cámara si se abre
     this.obtenerDispositivos();
+  }
+
+  // 🔁 Formatea un número con puntos de miles
+  formatearMonto(value: string): string {
+    const numeroLimpio = value.replace(/\D/g, ''); // Elimina todo lo que no sea número
+    if (!numeroLimpio) return '';
+    return numeroLimpio.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Agrega punto cada 3 cifras
+  }
+
+  // 🔁 Actualiza el input cada vez que el usuario escribe, formateando con puntos
+  onMontoChange(event: any): void {
+    const valorInput = event.target.value || '';
+    const valorFormateado = this.formatearMonto(valorInput);
+    this.publicacionForm.get('montoPaga')?.setValue(valorFormateado, { emitEvent: false });
   }
 
   async obtenerDispositivos() {
@@ -66,16 +79,12 @@ export class AddPublicacionPage implements OnInit {
         {
           text: 'Abrir Cámara',
           icon: 'camera',
-          handler: () => {
-            this.abrirCamaraDirecta();
-          }
+          handler: () => this.abrirCamaraDirecta()
         },
         {
           text: 'Seleccionar desde Galería',
           icon: 'image',
-          handler: () => {
-            this.fileInput.nativeElement.click();
-          }
+          handler: () => this.fileInput.nativeElement.click()
         },
         {
           text: 'Cancelar',
@@ -90,7 +99,6 @@ export class AddPublicacionPage implements OnInit {
 
   async abrirCamaraDirecta() {
     if (isPlatform('capacitor')) {
-      // Si es móvil con Capacitor, usar plugin cámara nativo
       const opciones = [
         { text: 'Cámara trasera', direction: CameraDirection.Rear },
         { text: 'Cámara frontal', direction: CameraDirection.Front }
@@ -120,11 +128,7 @@ export class AddPublicacionPage implements OnInit {
         }
       }));
 
-      buttons.push({
-        text: 'Cancelar',
-        role: 'cancel',
-        handler: () => Promise.resolve()
-      });
+      buttons.push({ text: 'Cancelar', role: 'cancel' });
 
       const actionSheet = await this.actionSheetController.create({
         header: 'Elige cámara',
@@ -133,7 +137,6 @@ export class AddPublicacionPage implements OnInit {
 
       await actionSheet.present();
     } else {
-      // Navegador: abrir cámara web
       try {
         if (this.devices.length === 0) {
           await this.obtenerDispositivos();
@@ -141,12 +144,11 @@ export class AddPublicacionPage implements OnInit {
         if (this.devices.length > 0) {
           await this.iniciarCamara(this.devices[this.currentDeviceIndex].deviceId);
         } else {
-          console.warn('No hay cámaras disponibles');
           this.fileInput.nativeElement.click();
         }
       } catch (error) {
         console.error('Error al acceder a la cámara web:', error);
-        this.fileInput.nativeElement.click(); // fallback galería
+        this.fileInput.nativeElement.click();
       }
     }
   }
@@ -156,9 +158,8 @@ export class AddPublicacionPage implements OnInit {
       if (this.stream) {
         this.stream.getTracks().forEach(track => track.stop());
       }
-      this.mostrandoVideo = true; // primero mostrar el video en DOM
 
-      // Esperamos que Angular actualice el DOM para que videoElement exista
+      this.mostrandoVideo = true;
       await new Promise(resolve => setTimeout(resolve, 100));
 
       this.stream = await navigator.mediaDevices.getUserMedia({
@@ -168,7 +169,6 @@ export class AddPublicacionPage implements OnInit {
 
       this.videoElement.nativeElement.srcObject = this.stream;
       await this.videoElement.nativeElement.play();
-
     } catch (error) {
       console.error('Error al iniciar cámara:', error);
       this.mostrandoVideo = false;
@@ -176,7 +176,7 @@ export class AddPublicacionPage implements OnInit {
   }
 
   cambiarCamaraWeb() {
-    if (this.devices.length <= 1) return; // No hay otra cámara para cambiar
+    if (this.devices.length <= 1) return;
     this.currentDeviceIndex = (this.currentDeviceIndex + 1) % this.devices.length;
     this.iniciarCamara(this.devices[this.currentDeviceIndex].deviceId);
   }
@@ -251,11 +251,15 @@ export class AddPublicacionPage implements OnInit {
     }
 
     const form = this.publicacionForm.value;
+
+    // Convertimos el monto a número eliminando los puntos antes de guardar
+    const montoNumerico = Number(form.montoPaga.replace(/\./g, ''));
+
     const nuevaPublicacion = {
       agregarfoto: urlImagen,
       titulo: form.titulo,
       descripcion: form.descripcion,
-      montoPaga: Number(form.montoPaga),
+      montoPaga: montoNumerico,
       comuna: form.comuna,
       categoria: form.categoria,
       fecha: new Date(),
@@ -274,3 +278,4 @@ export class AddPublicacionPage implements OnInit {
     this.router.navigate(['/crear-publicacion']);
   }
 }
+
