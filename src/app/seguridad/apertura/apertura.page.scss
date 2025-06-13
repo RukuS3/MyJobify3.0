@@ -1,5 +1,5 @@
 ion-content {
-  --background: #7a0000; /* Fondo rojo */
+  --background: #7b0a0a; /* Fondo rojo */
   color: white;
 }
 
@@ -7,14 +7,10 @@ ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100%; // centra verticalmente también
 }
 
-.logo {
-  font-size: 2.2rem;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  color: white; /* Letras blancas */
-  margin: 0;
-  padding: 0;
-  text-align: center;
+.logo-img {
+  max-width: 60%;
+  height: auto;
 }

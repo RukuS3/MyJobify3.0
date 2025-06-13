@@ -36,7 +36,7 @@
       padding: 12px;
       margin: 10px 0;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 
       .card-left {
         flex: 1;
@@ -66,18 +66,22 @@
           font-size: 14px;
         }
         .heart-btn {
-          margin-top: 10px;
-          padding: 0;
-          height: auto;
+          margin-top: 0px;
+          padding: 10px 16px;       // Más espacio interno
+          font-size: 20px;          // Tamaño del texto o ícono
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
+        
       }
 
       .card-right {
         flex-shrink: 0;  // evita que la imagen se reduzca
 
         img.publicacion-img {
-          width: 100px;
-          height: 100px;
+          width: 120px;
+          height: 120px;
           object-fit: cover;
           border-radius: 10px;
           display: block;

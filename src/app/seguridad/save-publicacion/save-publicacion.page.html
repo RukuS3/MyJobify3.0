@@ -21,7 +21,7 @@
         </ion-thumbnail>
         <ion-label>
           <h2>{{ item.titulo }}</h2>
-          <p><strong>Comuna:</strong> {{ item.comuna }}</p>
+          <p><strong>Comuna:</strong> {{ formatearComuna(item.comuna) }}</p>
           <p *ngIf="item.nombreUsuario"><strong>Publicado por:</strong> {{ item.nombreUsuario }}</p>
           <p *ngIf="item.fecha"><small>Publicado: {{ item.fecha | date:'mediumDate' }}</small></p>
         </ion-label>

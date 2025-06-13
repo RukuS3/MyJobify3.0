@@ -46,6 +46,14 @@ export class CrearPublicacionPage implements OnInit {
     });
   }
 
+  comunaSeleccionada: string = 'el_bosque'; // o el valor real que tengas
+
+  formatearComuna(comuna: string): string {
+    return comuna.replace(/_/g, ' ').replace(/\b\w/g, letra => letra.toUpperCase());
+  }
+  
+  
+
   async confirmarEliminarPublicacion(id: string) {
     const alert = await this.alertController.create({
       header: '¿Eliminar publicación?',

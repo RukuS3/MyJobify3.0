@@ -5,24 +5,23 @@
   height: 100%;
 }
 
-.login-container {
-  width: 100%;
-  max-width: 320px;
-  margin: auto;
-  text-align: center;
+.logo-img-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.logo {
-  margin-top: 120px;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  font-size: 3.5rem;
-  color: #a10000;
-  margin-bottom: 0.5rem;
+.logo-img {
+  margin-top: 70px;
+  width: 220px;
+  height: auto;
+  border-radius: 12px;
 }
 
 .login-title {
+  text-align: center;
   margin-top: 30px;
-  color: #a10000;
+  color: #7b0a0a;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: bold;
@@ -71,7 +70,7 @@
 }
 
 .forgot-password a {
-  color: #a10000;
+  color: #7b0a0a;
   text-decoration: none;
   font-family: 'Arial', sans-serif;
   font-size: 0.9rem;
@@ -84,14 +83,14 @@
 }
 
 .register-text p {
-  color: #a10000;
+  color: #7b0a0a;
   font-family: 'Arial', sans-serif;
   font-size: 0.9rem;
   margin: 0;
 }
 
 .gradient-button {
-  --background: linear-gradient(to right, #f18595, #a10000);
+  --background: linear-gradient(to right, #f18595, #7b0a0a);
   --color: white;
   border-radius: 20px;
   margin-top: 10px;

@@ -112,6 +112,11 @@ export class InicioPage implements OnInit, OnDestroy {
     this.subs.forEach(sub => sub.unsubscribe());
   }
 
+  formatearComuna(comuna: string): string {
+    return comuna.replace(/_/g, ' ').replace(/\b\w/g, letra => letra.toUpperCase());
+  }
+  
+
   verDetalle(id: string) {
     this.router.navigate(['/trabajos/detalle-publicacion', id]);
   }

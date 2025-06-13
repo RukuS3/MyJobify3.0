@@ -22,7 +22,7 @@
       <ion-card-content>
         <p><strong>Descripción:</strong> {{ pub.descripcion }}</p>
         <p><strong>Monto a pagar:</strong> ${{ pub.montoPaga }}</p>
-        <p><strong>Comuna:</strong> {{ pub.comuna }}</p>
+        <p><strong>Comuna:</strong> {{ formatearComuna(comunaSeleccionada) }}</p>
         <p><strong>Categoría:</strong> {{ pub.categoria }}</p>
         <p><strong>Fecha:</strong> {{ pub.fecha | date: 'dd/MM/yyyy, h:mm a' }}</p>
 

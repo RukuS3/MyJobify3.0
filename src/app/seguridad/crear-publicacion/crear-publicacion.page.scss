@@ -77,7 +77,7 @@
 
     ion-icon {
       font-size: 27px; /* ← tamaño correcto y grande */
-      color: #b30000;
+      color: #7b0a0a;
     }
 
     &:active {
@@ -94,7 +94,7 @@
 }
 
 .login-button {
-  background: linear-gradient(to right, #ff8a8a, #8b0000); 
+  background: linear-gradient(to right, #ff8a8a, #7b0a0a); 
   color: white;
   font-weight: bold;
   border-radius: 20px;
@@ -141,7 +141,7 @@ ion-button.login-button.centrado {
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color: #8b0000; // gris elegante
+  color: #7b0a0a; // gris elegante
   padding: 30px 20px;
   font-size: 1.1rem;
   font-weight: 500;
@@ -152,7 +152,7 @@ ion-button.login-button.centrado {
 
   .icono-info {
     font-size: 2.5rem;
-    color: #a50202;
+    color: #7b0a0a;
     margin-bottom: 10px;
   }
 }

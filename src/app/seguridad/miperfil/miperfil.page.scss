@@ -3,72 +3,49 @@
 
   .inicio-container {
     padding: 10px 16px;
+  }
 
-    .search-bar {
+  .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+
+    .card-left {
       display: flex;
-      align-items: center;
-      background-color: #fff;
-      border: 2px solid #b30000;
-      border-radius: 25px;
-      padding: 8px 12px;
-      margin: 16px 0;
+      flex-direction: column;
 
-      .search-icon {
-        font-size: 20px;
-        color: #b30000;
-        margin-right: 8px;
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
       }
 
-      input {
-        border: none;
-        outline: none;
-        flex: 1;
-        font-size: 16px;
+      .rating {
+        display: flex;
+        align-items: center;
+        margin-top: 4px;
+
+        ion-icon {
+          color: gold;
+          margin-right: 4px;
+        }
+
+        h5 {
+          font-weight: bold;
+        }
       }
     }
 
-    .card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f9f9f9;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 12px;
-      box-shadow: 0 8px px rgba(0, 0, 0, 0.1);
-
-      .card-left {
-        display: flex;
-        flex-direction: column;
-
-        h3 {
-          margin: 0;
-          font-size: 16px;
-          font-weight: bold;
-        }
-
-        .rating {
-          display: flex;
-          align-items: center;
-          margin-top: 4px;
-
-          ion-icon {
-            color: gold;
-            margin-right: 4px;
-          }
-
-          h5 {
-            font-weight: bold;
-          }
-        }
-      }
-
-      .card-right img {
-        width: 80px;
-        height: 80px;
-        border-radius: 8px;
-        object-fit: cover;
-      }
+    .card-right img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
     }
   }
 }
@@ -84,16 +61,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0;
-  }
-
-  .logo {
-    font-size: 1.8rem;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    color: #b30000;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    flex: 1;
   }
 
   .header-buttons {
@@ -137,13 +104,28 @@
 
     ion-icon {
       font-size: 27px;
-      color: #b30000;
+      color: #7b0a0a;
     }
 
     &:active {
       background-color: rgba(179, 0, 0, 0.1);
     }
   }
+}
+
+/* 🔥 NUEVO: Imagen del logo centrada en el header */
+.logo-img-container {
+  flex: 1;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  padding: 4px 0;
+}
+
+.logo-img {
+  max-width: 120px;
+  height: auto;
+  object-fit: contain;
 }
 
 .profile-section {
@@ -179,7 +161,6 @@
       border-bottom-right-radius: 50%;
     }
 
-    /* Corona de estrellas arriba de la foto */
     .stars-corona {
       position: absolute;
       top: -28px;
@@ -190,22 +171,20 @@
       z-index: 10;
 
       ion-icon {
-        color: #f4c150; /* dorado */
+        color: #f4c150;
         font-size: 22px;
         filter: drop-shadow(0 0 1px #b37700);
       }
     }
   }
 
-  /* Texto calificación debajo de la foto */
   .calificacion-texto {
     margin-top: 8px;
     font-weight: 600;
     font-size: 14px;
-    color: #b30000;
+    color: #7b0a0a;
   }
 
-  /* Mensaje si no tiene calificación */
   .sin-calificacion {
     margin-top: 8px;
     font-style: italic;

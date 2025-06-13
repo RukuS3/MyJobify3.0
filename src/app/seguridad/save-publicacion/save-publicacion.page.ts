@@ -21,6 +21,10 @@ export class SavePublicacionPage {
   this.router.navigate(['/trabajos/detalle-publicacion', id]);
 }
 
+formatearComuna(comuna: string): string {
+  return comuna.replace(/_/g, ' ').replace(/\b\w/g, letra => letra.toUpperCase());
+}
+
   ionViewWillEnter() {
     this.auth.currentUser.then(user => {
       if (user) {

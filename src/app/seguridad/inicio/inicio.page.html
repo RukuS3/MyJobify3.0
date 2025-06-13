@@ -21,22 +21,22 @@
         interface="popover" 
         placeholder="Selecciona" 
         class="select-categoria">
-        <ion-select-option value="Otros">Otros</ion-select-option>
-        <ion-select-option value="todas">Todos</ion-select-option>
-        <ion-select-option value="electricista">Electricista</ion-select-option>
-        <ion-select-option value="plomero">Plomero</ion-select-option>
-        <ion-select-option value="cerrajero">Cerrajero</ion-select-option>
-        <ion-select-option value="mecanico">Mecánico</ion-select-option>
-        <ion-select-option value="gasfiter">Gasfíter</ion-select-option>
-        <ion-select-option value="pintor">Pintor</ion-select-option>
-        <ion-select-option value="albanil">Albañil</ion-select-option>
-        <ion-select-option value="obrero">Obrero</ion-select-option>
-        <ion-select-option value="carpintero">Carpintero</ion-select-option>
-        <ion-select-option value="sastre">Sastre</ion-select-option>
-        <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
-        <ion-select-option value="lavar_auto">Lavar Auto</ion-select-option>
-        <ion-select-option value="jardineria">Jardinería</ion-select-option>
-        <ion-select-option value="masajista">Masajista</ion-select-option>
+        <ion-select-option value="otros">Otros</ion-select-option>
+        <ion-select-option value="albanil">Albañil/a</ion-select-option>
+          <ion-select-option value="carpintero">Carpintero/a</ion-select-option>
+          <ion-select-option value="cerrajero">Cerrajero/a</ion-select-option>
+          <ion-select-option value="electricista">Electricista</ion-select-option>
+          <ion-select-option value="gasfiter">Gasfíter/a</ion-select-option>
+          <ion-select-option value="jardineria">Jardinero/a</ion-select-option>
+          <ion-select-option value="lavar_auto">Lavar auto</ion-select-option>
+          <ion-select-option value="masajista">Masajista</ion-select-option>
+          <ion-select-option value="mecanico">Mecánico/a</ion-select-option>
+          <ion-select-option value="obrero">Obrero/a</ion-select-option>
+          <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
+          <ion-select-option value="pintor">Pintor/a</ion-select-option>
+          <ion-select-option value="plomero">Plomero/a</ion-select-option>
+          <ion-select-option value="sastre">Sastre/a</ion-select-option>
+          <ion-select-option value="vidriero">Vidriero/a</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -44,7 +44,8 @@
     <div *ngFor="let item of publicacionesFiltradas | slice:0:limite" class="card" (click)="verDetalle(item.id)">
       <div class="card-left">
         <h3>{{ item.titulo }}</h3>
-        <p>{{ item.comuna }}</p>
+        <p>{{ formatearComuna(item.comuna) }}</p>
+
         <p class="descripcion">
           Pago estimado: {{ item.montoPaga | currency:'CLP':'symbol':'1.0-0' }}
         </p>

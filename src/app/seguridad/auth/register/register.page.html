@@ -1,7 +1,10 @@
 <ion-content class="ion-padding register-content">
   <div class="register-container">
-    <h1 class="logo">MYJOBIFY</h1>
-    <h2 class="register-title">Crear Cuenta</h2>
+    <!-- Imagen centrada -->
+    <div class="logo-img-container">
+      <img src="assets/2.png" alt="Logo MyJobify" class="logo-img" />
+    </div>
+    <h2 class="register-title">Registrate</h2>
 
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="register-form">
       <ion-input formControlName="rut" placeholder="Ingresa tu RUT sin guión" class="custom-input" type="text"></ion-input>
