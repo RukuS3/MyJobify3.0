@@ -3,28 +3,6 @@
   
     .inicio-container {
       padding: 10px 16px;
-  
-      .search-bar {
-        display: flex;
-        align-items: center;
-        background-color: #fff;
-        border: 2px solid #b30000;
-        border-radius: 25px;
-        padding: 6px 12px;
-        margin: 10px 0;
-  
-        .search-icon {
-          color: #b30000;
-          font-size: 1.2rem;
-          margin-right: 8px;
-        }
-  
-        input {
-          border: none;
-          outline: none;
-          width: 100%;
-          font-size: 1rem;
-        }
       }
 
       .select-pro{
@@ -44,25 +22,6 @@
           display: flex;
           flex-direction: column;
           justify-content: center;
-  
-          h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0 0 4px 0;
-          }
-  
-          .rating {
-            display: flex;
-            align-items: center;
-  
-            ion-icon {
-              color: gold;
-              margin-right: 4px;
-            }
-  
-            span {
-              font-weight: bold;
-            }
           }
         }
   
@@ -73,8 +32,6 @@
           border-radius: 8px;
         }
       }
-    }
-  }
   
 .custom-header {
   --background: #ffffff !important;
@@ -90,13 +47,18 @@
   }
 
   .logo {
-    font-size: 1.8rem;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    color: #b30000;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    display: flex;
+    align-items: center;
     flex: 1;
+    margin: 0;
+    padding-top: 10px;
+    text-align: left;
+  }
+
+  .logo-img {
+    height: 40px; // más grande
+    max-width: 100px;
+    object-fit: contain;
   }
 
   .header-buttons {
@@ -120,32 +82,6 @@
     height: 35px !important;
     border-radius: 50%;
     object-fit: cover;
-  }
-
-  .notification-button {
-    position: absolute;
-    bottom: -9px;
-    left: -9px;
-    width: 32px;
-    height: 32px;
-    min-width: auto;
-    padding: 0;
-    background: transparent;
-    border-radius: 50%;
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    ion-icon {
-      font-size: 27px; /* ← tamaño correcto y grande */
-      color: #b30000;
-    }
-
-    &:active {
-      background-color: rgba(179, 0, 0, 0.1); /* feedback visual */
-    }
   }
 }
 

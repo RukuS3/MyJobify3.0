@@ -12,13 +12,18 @@
   }
 
   .logo {
-    font-size: 1.8rem;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    color: #b30000;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    display: flex;
+    align-items: center;
     flex: 1;
+    margin: 0;
+    padding-top: 10px;
+    text-align: left;
+  }
+
+  .logo-img {
+    height: 40px; // más grande
+    max-width: 100px;
+    object-fit: contain;
   }
 
   .header-buttons {
@@ -27,60 +32,58 @@
   }
 
   .avatar-container {
-    position: relative;
-    width: 45px;
-    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-left: 0px;
+    padding: 0;
   }
-
+  
+  .notification-button,
   .profile-btn {
-    padding: 0;
-    margin: 0;
-  }
-
-  .profile-avatar {
-    width: 35px !important;
-    height: 35px !important;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .notification-button {
-    position: absolute;
-    bottom: -9px;
-    left: -9px;
-    width: 32px;
-    height: 32px;
+    margin: 0 !important;
+    padding: 0 !important;
     min-width: auto;
-    padding: 0;
+  }
+  
+  .notification-button {
+    position: relative;
+    width: 34px;       // antes 30-32px, más compacto
+    height: 34px;      // más pequeño
+    min-width: auto;   // evita que sea mínimo 44px por defecto de Ionic
+    padding: 2 !important;
+    transform: translateY(12px);
     background: transparent;
-    border-radius: 50%;
-    z-index: 2;
-
+    border-radius: 100%;
+    z-index: 4;
     display: flex;
     align-items: center;
     justify-content: center;
-
+  
     ion-icon {
-      font-size: 27px;
+      font-size: 80px;  // reduce el ícono también si es necesario
       color: #b30000;
     }
-
-    &:active {
-      background-color: rgba(179, 0, 0, 0.1);
-    }
+  
   }
-}
-
-.badge-notificacion {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background-color: #ff3b30;
-  color: #fff;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 50%;
-  pointer-events: none; 
-  z-index: 5;
-  line-height: 1;
+  
+  .badge-notificacion {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: #ff3b30;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    z-index: 5;
+  }
+  
+  .profile-avatar {
+    width: 35px !important;
+    height: 35px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: -10px;
+  }
 }
