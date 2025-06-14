@@ -1,9 +1,8 @@
-// Cuerpo
 .inicio-content {
   --background: #ffffff;
 
   .inicio-container {
-    padding: 10px 16px;
+    padding: 1rem;
 
     .search-bar {
       display: flex;
@@ -11,47 +10,65 @@
       background-color: #fff;
       border: 2px solid #b30000;
       border-radius: 25px;
-      padding: 8px 12px;
-      margin: 16px 0;
+      padding: 0.5rem 1rem;
+      margin: 1rem 0;
 
       .search-icon {
-        font-size: 20px;
+        font-size: 1.3rem;
         color: #b30000;
-        margin-right: 8px;
+        margin-right: 0.5rem;
       }
 
       input {
         border: none;
         outline: none;
         flex: 1;
-        font-size: 16px;
+        font-size: 1rem;
+      }
+    }
+
+    .categoria-filtros {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      .select-categoria-label {
+        font-size: 1rem;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .select-categoria {
+        max-width: 60%;
+        font-size: 1rem;
       }
     }
 
     .card {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;  // Para que imagen y texto se alineen bien
+      align-items: flex-start;
       background-color: #f9f9f9;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
       border-radius: 12px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 
       .card-left {
         flex: 1;
-        margin-right: 15px;  // Espacio entre texto e imagen
-        min-width: 0;        // Permite que texto se reduzca y no fuerce ancho
+        margin-right: 1rem;
+        min-width: 0;
 
         h3 {
           margin: 0;
-          font-size: 16px;
+          font-size: 1.1rem;
           font-weight: bold;
         }
 
         p {
-          margin: 4px 0;
-          font-size: 14px;
+          margin: 0.25rem 0;
+          font-size: 0.9rem;
         }
 
         .descripcion {
@@ -59,87 +76,55 @@
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-box-orient: vertical;
-          white-space: normal;
-          max-height: 40px; /* Limita la altura (aprox 2 líneas) */
-          margin-top: 4px;
+          -webkit-line-clamp: 2;
           color: #555;
-          font-size: 14px;
+          font-size: 0.9rem;
         }
-        .heart-btn {
-          margin-top: 0px;
-          padding: 10px 16px;       // Más espacio interno
-          font-size: 20px;          // Tamaño del texto o ícono
+
+        .calificacion-favorito {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
+          margin-top: 0.5rem;
+
+          .estrellas-container {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+          }
+
+          .rating-num {
+            margin-left: 0.3rem;
+            font-weight: bold;
+            color: #555;
+          }
+
+          .sin-calificacion {
+            color: #999;
+            font-size: 0.85rem;
+          }
+
+          .heart-btn {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            font-size: 1.3rem;
+          }
         }
-        
       }
 
       .card-right {
-        flex-shrink: 0;  // evita que la imagen se reduzca
+        flex-shrink: 0;
 
-        img.publicacion-img {
-          width: 120px;
-          height: 120px;
+        .publicacion-img {
+          width: 6.5rem;
+          height: 6.5rem;
           object-fit: cover;
           border-radius: 10px;
           display: block;
         }
       }
     }
-  }
-}
-
-//Boton filtro
-.select-categoria-item {
-
-  margin-right: 350px;
-}
-
-.select-categoria-label {
-  font-size: 16px;
-}
-
-.select-categoria {
-  
-  font-size: 16px;
-}
-
-
-.estrellas-container {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
-  font-size: 14px;
-}
-
-.rating-num {
-  margin-left: 6px;
-  font-weight: bold;
-  color: #555;
-}
-
-.sin-calificacion {
-  color: #999;
-  font-size: 13px;
-}
-
-.calificacion-favorito {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 10px;
-
-  .estrellas-container {
-    margin: 0;
-  }
-
-  .heart-btn {
-    margin: 0;
-    padding: 0;
-    height: auto;
   }
 }

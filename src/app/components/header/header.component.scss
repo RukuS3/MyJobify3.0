@@ -2,13 +2,17 @@
   --background: #ffffff !important;
   box-shadow: none;
   border-bottom: none;
-  padding: 0 16px;
+  padding-top: calc(env(safe-area-inset-top) + 4px); // Espacio para evitar superposición con status bar
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 12px;
 
   ion-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    min-height: 56px;
   }
 
   .logo {
@@ -16,12 +20,11 @@
     align-items: center;
     flex: 1;
     margin: 0;
-    padding-top: 10px;
     text-align: left;
   }
 
   .logo-img {
-    height: 40px; // más grande
+    height: 40px;
     max-width: 100px;
     object-fit: contain;
   }
@@ -35,38 +38,35 @@
     display: flex;
     align-items: center;
     gap: 0;
-    margin-left: 0px;
+    margin-left: 0;
     padding: 0;
   }
-  
+
   .notification-button,
   .profile-btn {
     margin: 0 !important;
     padding: 0 !important;
     min-width: auto;
   }
-  
+
   .notification-button {
     position: relative;
-    width: 34px;       // antes 30-32px, más compacto
-    height: 34px;      // más pequeño
-    min-width: auto;   // evita que sea mínimo 44px por defecto de Ionic
-    padding: 2 !important;
-    transform: translateY(12px);
+    width: 34px;
+    height: 34px;
+    padding: 2px !important;
     background: transparent;
     border-radius: 100%;
     z-index: 4;
     display: flex;
     align-items: center;
     justify-content: center;
-  
+
     ion-icon {
-      font-size: 80px;  // reduce el ícono también si es necesario
+      font-size: 24px;
       color: #b30000;
     }
-  
   }
-  
+
   .badge-notificacion {
     position: absolute;
     top: -4px;
@@ -78,7 +78,7 @@
     border-radius: 50%;
     z-index: 5;
   }
-  
+
   .profile-avatar {
     width: 35px !important;
     height: 35px !important;

@@ -1,23 +1,26 @@
 <ion-header class="custom-header">
   <ion-toolbar>
-    <ion-title slot="start" class="logo">
+    <ion-content [fullscreen]="true"></ion-content>
+    <ion-buttons slot="start">
       <img src="assets/2.png" alt="MYJOBIFY" class="logo-img" />
-    </ion-title>
-
-    
-    <ion-buttons slot="end">
-      <div class="avatar-container">
-        <ion-button class="notification-button" fill="clear" [routerLink]="'/solicitud-empleo'">
-          <ion-icon name="notifications-outline"></ion-icon>
-          <ion-badge *ngIf="solicitudesPendientesCount > 0" color="danger" class="badge-notificacion">
-            {{ solicitudesPendientesCount }}
-          </ion-badge>
-        </ion-button><ion-button class="profile-btn" fill="clear" [routerLink]="'/miperfil'">
-          <ion-avatar class="profile-avatar">
-            <img [src]="fotoPerfil" alt="Perfil" />
-          </ion-avatar>
-        </ion-button>
-      </div>
     </ion-buttons>
-    
+
+    <ion-buttons slot="end">
+      <ion-button class="notification-button" fill="clear" [routerLink]="'/solicitud-empleo'">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-badge *ngIf="solicitudesPendientesCount > 0" color="danger" class="badge-notificacion">
+          {{ solicitudesPendientesCount }}
+        </ion-badge>
+      </ion-button>
+
+      <ion-button class="profile-btn" fill="clear" [routerLink]="'/miperfil'">
+        <ion-avatar class="profile-avatar">
+          <img [src]="fotoPerfil" alt="Perfil" />
+        </ion-avatar>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
 

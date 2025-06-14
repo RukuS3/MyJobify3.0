@@ -14,8 +14,8 @@
     </div>
 
     <!-- Selector de categoría -->
-    <ion-item lines="none" class="select-categoria-item">
-      <ion-label class="select-categoria-label">Filtros:</ion-label>
+    <div class="categoria-filtros">
+      <span class="select-categoria-label">Filtros:</span>
       <ion-select 
         [(ngModel)]="categoriaSeleccionada" 
         interface="popover" 
@@ -23,22 +23,22 @@
         class="select-categoria">
         <ion-select-option value="otros">Otros</ion-select-option>
         <ion-select-option value="albanil">Albañil/a</ion-select-option>
-          <ion-select-option value="carpintero">Carpintero/a</ion-select-option>
-          <ion-select-option value="cerrajero">Cerrajero/a</ion-select-option>
-          <ion-select-option value="electricista">Electricista</ion-select-option>
-          <ion-select-option value="gasfiter">Gasfíter/a</ion-select-option>
-          <ion-select-option value="jardineria">Jardinero/a</ion-select-option>
-          <ion-select-option value="lavar_auto">Lavar auto</ion-select-option>
-          <ion-select-option value="masajista">Masajista</ion-select-option>
-          <ion-select-option value="mecanico">Mecánico/a</ion-select-option>
-          <ion-select-option value="obrero">Obrero/a</ion-select-option>
-          <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
-          <ion-select-option value="pintor">Pintor/a</ion-select-option>
-          <ion-select-option value="plomero">Plomero/a</ion-select-option>
-          <ion-select-option value="sastre">Sastre/a</ion-select-option>
-          <ion-select-option value="vidriero">Vidriero/a</ion-select-option>
+        <ion-select-option value="carpintero">Carpintero/a</ion-select-option>
+        <ion-select-option value="cerrajero">Cerrajero/a</ion-select-option>
+        <ion-select-option value="electricista">Electricista</ion-select-option>
+        <ion-select-option value="gasfiter">Gasfíter/a</ion-select-option>
+        <ion-select-option value="jardineria">Jardinero/a</ion-select-option>
+        <ion-select-option value="lavar_auto">Lavar auto</ion-select-option>
+        <ion-select-option value="masajista">Masajista</ion-select-option>
+        <ion-select-option value="mecanico">Mecánico/a</ion-select-option>
+        <ion-select-option value="obrero">Obrero/a</ion-select-option>
+        <ion-select-option value="pasear_mascota">Pasear mascota</ion-select-option>
+        <ion-select-option value="pintor">Pintor/a</ion-select-option>
+        <ion-select-option value="plomero">Plomero/a</ion-select-option>
+        <ion-select-option value="sastre">Sastre/a</ion-select-option>
+        <ion-select-option value="vidriero">Vidriero/a</ion-select-option>
       </ion-select>
-    </ion-item>
+    </div>
 
     <!-- Lista de publicaciones -->
     <div *ngFor="let item of publicacionesFiltradas | slice:0:limite" class="card" (click)="verDetalle(item.id)">
@@ -50,15 +50,10 @@
           Pago estimado: {{ item.montoPaga | currency:'CLP':'symbol':'1.0-0' }}
         </p>
 
-        <!-- Estrellas + botón heart -->
         <div class="calificacion-favorito">
           <div class="estrellas-container">
             <ng-container *ngIf="item.promedioCalificacion !== null && item.promedioCalificacion !== undefined; else sinCalificacion">
-              <ion-icon 
-                *ngFor="let estrella of obtenerEstrellas(item.promedioCalificacion)" 
-                [name]="estrella" 
-                color="warning">
-              </ion-icon>
+              <ion-icon *ngFor="let estrella of obtenerEstrellas(item.promedioCalificacion)" [name]="estrella" color="warning"></ion-icon>
               <span class="rating-num">{{ item.promedioCalificacion }}</span>
             </ng-container>
             <ng-template #sinCalificacion>
