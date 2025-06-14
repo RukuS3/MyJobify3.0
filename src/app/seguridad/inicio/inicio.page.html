@@ -21,6 +21,7 @@
         interface="popover" 
         placeholder="Categorías" 
         class="select-categoria">
+        <ion-select-option value="todos">Todas</ion-select-option>
         <ion-select-option value="otros">Otros</ion-select-option>
         <ion-select-option value="albanil">Albañil/a</ion-select-option>
         <ion-select-option value="carpintero">Carpintero/a</ion-select-option>
@@ -41,7 +42,11 @@
     </div>
 
     <!-- Lista de publicaciones -->
-    <div *ngFor="let item of publicacionesFiltradas | slice:0:limite" class="card" (click)="verDetalle(item.id)">
+    <div 
+      *ngFor="let item of publicacionesFiltradas | slice:0:limite" 
+      class="card" 
+      (click)="verDetalle(item.id)">
+      
       <div class="card-left">
         <h3>{{ item.titulo }}</h3>
         <p>{{ formatearComuna(item.comuna) }}</p>
@@ -60,6 +65,7 @@
               <span class="sin-calificacion">Sin calificaciones</span>
             </ng-template>
           </div>
+
           <ion-button fill="clear" class="heart-btn" (click)="guardarPublicacion(item); $event.stopPropagation()">
             <ion-icon [name]="estaGuardada(item) ? 'heart' : 'heart-outline'" color="danger"></ion-icon>
           </ion-button>
@@ -67,16 +73,24 @@
       </div>
 
       <div class="card-right">
-        <img [src]="item.agregarfoto" alt="Imagen" class="publicacion-img" *ngIf="item.agregarfoto" />
+        <img 
+          [src]="item.agregarfoto" 
+          alt="Imagen" 
+          class="publicacion-img" 
+          *ngIf="item.agregarfoto" />
       </div>
     </div>
 
     <!-- Scroll infinito -->
     <ion-infinite-scroll threshold="100px" (ionInfinite)="cargarMas($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más..."></ion-infinite-scroll-content>
+      <ion-infinite-scroll-content 
+        loadingSpinner="bubbles" 
+        loadingText="Cargando más...">
+      </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
   </div>
 </ion-content>
 
 <app-footer></app-footer>
+
