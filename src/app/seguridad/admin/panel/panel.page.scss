@@ -72,6 +72,7 @@ ion-content {
 
 .custom-header {
   --background: #ffffff !important;
+  padding-top: calc(env(safe-area-inset-top) + 4px); // Espacio para evitar superposición con status bar
   box-shadow: none;
   border-bottom: none;
   padding: 0 16px;

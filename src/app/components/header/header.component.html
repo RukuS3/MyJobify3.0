@@ -1,11 +1,11 @@
 <ion-header class="custom-header">
   <ion-toolbar>
-    <ion-content [fullscreen]="true"></ion-content>
     <ion-buttons slot="start">
       <img src="assets/2.png" alt="MYJOBIFY" class="logo-img" />
     </ion-buttons>
 
     <ion-buttons slot="end">
+      <!-- Botón de notificaciones -->
       <ion-button class="notification-button" fill="clear" [routerLink]="'/solicitud-empleo'">
         <ion-icon name="notifications-outline"></ion-icon>
         <ion-badge *ngIf="solicitudesPendientesCount > 0" color="danger" class="badge-notificacion">
@@ -13,14 +13,16 @@
         </ion-badge>
       </ion-button>
 
+      <!-- Botón de perfil -->
       <ion-button class="profile-btn" fill="clear" [routerLink]="'/miperfil'">
         <ion-avatar class="profile-avatar">
           <img [src]="fotoPerfil" alt="Perfil" />
         </ion-avatar>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
+
+
 
 

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Camera, CameraResultType, CameraSource, CameraDirection } from '@capacitor/camera';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-publicacion',
@@ -33,7 +34,9 @@ export class AddPublicacionPage implements OnInit {
     private firebaseService: FirebaseService,
     private router: Router,
     private afAuth: AngularFireAuth,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private toastController: ToastController
+
   ) {
     // Formulario reactivo con validaciones
     this.publicacionForm = this.fb.group({
@@ -47,6 +50,18 @@ export class AddPublicacionPage implements OnInit {
 
   ngOnInit() {
     this.obtenerDispositivos();
+  }
+
+
+  async mostrarToastGrande() {
+    const toast = await this.toastController.create({
+      message: '✅ Publicación creada con éxito',
+      duration: 3000,
+      position: 'top',
+      cssClass: 'toast-grande',
+      color: 'success'
+    });
+    await toast.present();
   }
 
   // 🔁 Formatea un número con puntos de miles
@@ -234,6 +249,7 @@ export class AddPublicacionPage implements OnInit {
     if (this.publicacionForm.invalid) return;
 
     let urlImagen = this.fotoPublicacion;
+    this.mostrarToastGrande();
 
     if (this.imagenFile) {
       try {

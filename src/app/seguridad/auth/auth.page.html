@@ -9,21 +9,31 @@
     <!-- Título -->
     <h2 class="login-title">Iniciar sesión</h2>
 
-    <!-- Formulario -->
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <ion-input
-        formControlName="email"
-        placeholder=" Ingrese su correo"
-        type="text"
-        class="custom-input"
-      ></ion-input>
+ <!-- Formulario -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  
+  <!-- Campo de correo -->
+  <ion-input
+    formControlName="email"
+    placeholder=" Ingrese su correo"
+    type="text"
+    class="custom-input"
+  ></ion-input>
 
-      <ion-input
-        formControlName="password"
-        placeholder=" Ingrese su contraseña"
-        type="password"
-        class="custom-input"
-      ></ion-input>
+  <!-- Campo de contraseña con ícono de ver -->
+  <div class="password-container">
+    <ion-input
+      [type]="verPassword ? 'text' : 'password'"
+      formControlName="password"
+      placeholder=" Ingrese su contraseña"
+      class="custom-input"
+    ></ion-input>
+    <ion-icon
+      [name]="verPassword ? 'eye-off-outline' : 'eye-outline'"
+      class="toggle-password"
+      (click)="verPassword = !verPassword"
+    ></ion-icon>
+  </div>
 
       <!-- Recordarme y Olvidé mi contraseña en una fila -->
       <div class="login-options">
@@ -36,11 +46,6 @@
         </div>
       </div>
 
-      <!-- Texto cuenta -->
-      <div class="register-text" routerLink="/register">
-        <p>¿No tienes cuenta?</p>
-      </div>
-
       <!-- Botón iniciar sesión -->
       <ion-button
         expand="block"
@@ -50,6 +55,11 @@
       >
         Iniciar sesión
       </ion-button>
+
+      <!-- Texto cuenta -->
+      <div class="register-text" routerLink="/register">
+        <p>¿No tienes cuenta?</p>
+      </div>
     </form>
   </div>
 </ion-content>

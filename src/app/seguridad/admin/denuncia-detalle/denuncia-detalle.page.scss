@@ -2,6 +2,7 @@
 .custom-header {
   --background: #ffffff !important;
   box-shadow: none;
+  padding-top: calc(env(safe-area-inset-top) + 4px); // Espacio para evitar superposición con status bar
   border-bottom: none;
   padding: 0 16px;
 
