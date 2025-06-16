@@ -1,12 +1,21 @@
 
 .custom-header {
   --background: #ffffff !important;
+
+  /* Padding top para respetar safe-area */
+  padding-top: env(safe-area-inset-top);
+  
+  /* Altura total = toolbar estándar (56px) + safe-area */
+  height: calc(56px + env(safe-area-inset-top));
+
   box-shadow: none;
-  padding-top: calc(env(safe-area-inset-top) + 4px); // Espacio para evitar superposición con status bar
   border-bottom: none;
-  padding: 0 16px;
+
+  padding-left: 16px;
+  padding-right: 16px;
 
   ion-toolbar {
+    height: 56px; /* altura estándar */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,11 +30,6 @@
     padding: 0;
     text-align: left;
     flex: 1;
-  }
-
-  .header-buttons {
-    display: flex;
-    align-items: center;
   }
 
   .avatar-container {
@@ -45,6 +49,7 @@
     border-radius: 50%;
     object-fit: cover;
   }
+
 
   .notification-button {
     position: absolute;

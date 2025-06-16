@@ -141,11 +141,12 @@
     <!-- input file oculto para navegador -->
     <input type="file" hidden #fileInput accept="image/*" capture="environment" (change)="seleccionarImagenDesdeInput($event)" />
 
-    <br>
-    <br>
-    <br>
-    <ion-button expand="block" color="danger" type="submit" [disabled]="publicacionForm.invalid">
-      Publicar
-    </ion-button>
+    <ion-button 
+    expand="block" 
+    color="danger" 
+    type="submit" 
+    [disabled]="publicacionForm.invalid || publicando">
+    Publicar
+  </ion-button>
   </form>
 </ion-content>

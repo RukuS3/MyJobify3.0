@@ -24,6 +24,7 @@ export class AddPublicacionPage implements OnInit {
   imagenFile: File | null = null;
   stream: MediaStream | null = null;
   mostrandoVideo: boolean = false;
+  publicando = false;
 
   devices: MediaDeviceInfo[] = [];
   currentDeviceIndex = 0;
@@ -246,16 +247,19 @@ export class AddPublicacionPage implements OnInit {
   }
 
   async publicar() {
-    if (this.publicacionForm.invalid) return;
-
+    if (this.publicando || this.publicacionForm.invalid) return;
+  
+    this.publicando = true; // Bloquea el botón
+  
     let urlImagen = this.fotoPublicacion;
     this.mostrarToastGrande();
-
+  
     if (this.imagenFile) {
       try {
         urlImagen = await this.firebaseService.subirImagen(this.imagenFile);
       } catch (error) {
         console.error("Error al subir imagen:", error);
+        this.publicando = false; // Reactiva el botón si falla
         return;
       }
     }
